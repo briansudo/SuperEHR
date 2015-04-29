@@ -1,0 +1,54 @@
+lib/chrono.rb
+- get_chrono_data
+    * refreshes token
+- retrieve_chrono_patients
+    * get patients
+- get_updated_chrono_patients_for_doctor
+    * return updated patients
+- set_pdf
+    * creates a pdf based on the chrono_detail, host, and recording
+    * POST req
+- update_pdf
+    * same as set_pdf, but PUT req
+- upload_pdf
+    * uploads the pdf
+- pdf_upload_request
+    * makes a post or put call for upload_pdf
+--- PRIVATE ---
+- create_temp_pdf
+    * download pdf for chrono_detail
+_ api_call_for_updated_chrono_patients
+    * called in get_updated_chrono_patients_for_doctor
+
+app/models/chrono_detail.rb
+- retrieve_chrono_patients
+    * calls Chrono::API.retrieve_chrono_patients
+- update_chrono
+    * gets updated chrono patients from get_all_updated_chrono_patients
+    * calls Patient.update_chrono_entries(updated_patients
+    * returns updated_patients
+- self.update_chrono
+    * same as above, except does not return updated_patients
+    * calls self.get_all_updated_chrono_patients
+    ** used in chron job
+- self.get_all_updated_chrono_patients
+    * for all ChronoDetails
+        get updated patients for a ChronoDetail and add it to a list
+            calls Chrono::API.new.get_updated_chrono_patients_for_doctor
+    * return that list of patients
+- get_updated_chrono_patients
+    * updates patients for self
+    * calls Chrono::API.new.get_updated_chrono_patients_for_doctor
+    * returns updated_patients
+
+app/controllers/dashboard/patients_controller.rb
+- setup_chrono (where is it called?)
+    * practitioner does OAUTH
+- sync_chrono
+    * uses ChronoDetail from store_chrono_data to retrieve patients
+    * calls Patient.sync_with_eko with the retrieved patients
+- store_chrono_data
+    * gets the current user's ChronoDetail, creating one if it hasn't yet been created,
+    * updates access/refresh tokens
+    * returns ChronoDetail
+
