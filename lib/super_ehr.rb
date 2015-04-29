@@ -408,8 +408,6 @@ module SuperEHR
 
     def refresh_token
       if @refresh_token == ''
-        puts get_request_url("o/token")
-        puts @redirect_uri
         response = HTTParty.post(get_request_url("o/token/"),
                                  :body => {:code => @access_code,
                                    :grant_type => "authorization_code",
