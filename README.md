@@ -1,4 +1,4 @@
-# SuperEHR
+# SuperEHR (Ruby Gem)
 Integrate with various EHRs seamlessly. Generalizes various EHR vendors' idiosyncrasies into one general template. Extending and adding more features to this Gem is easy. Currently supports: Allscripts, Athena, DrChrono.
 
 Each EHR has the following methods, unless otherwise noted:
