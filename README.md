@@ -16,6 +16,14 @@ To use:
 
 ```ruby
 require 'super_ehr'
+
+allscripts = SuperEHR.allscripts('ehr_username', 'ehr_password', 
+                      'app_username', 'app_password', 'app_name',
+                      false)
+
+athena = SuperEHR.athena('version', 'key', 'secret', 'practice_id')
+
+drchrono = SuperEHR.drchrono(access_code, client_id, client_secret, redirect_url)
 ```
 ---
 
