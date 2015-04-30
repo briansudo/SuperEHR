@@ -399,7 +399,7 @@ module SuperEHR
     end
 
     def get_request_headers
-      return { 'Authorization' => "Bearer #{refresh_token}" }
+      return { 'Authorization' => "Bearer #{@refresh_token}" }
     end
 
     def get_request_url(endpoint)
