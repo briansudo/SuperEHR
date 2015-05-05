@@ -382,7 +382,6 @@ module SuperEHR
   class DrChronoAPI < BaseEHR
 
     ### API SPECIFIC HOUSEKEEPING ###
-    attr_reader :access_token, :refresh_token
 
     def initialize(args={})
       params = {:access_code => '', :access_token => '', :refresh_token => '',
@@ -398,9 +397,7 @@ module SuperEHR
       @access_token = params[:access_token] 
       @refresh_token = params[:refresh_token] 
       @uri = URI.parse("https://drchrono.com")
-      #if (params[:access_token] == '' || params[:refresh_token] == '')
-        refresh_token
-      #end
+      refresh_token
     end
 
     def get_request_headers
@@ -409,6 +406,10 @@ module SuperEHR
 
     def get_request_url(endpoint)
       return "#{@uri}/#{endpoint}"
+    end
+
+    def get_access_token
+      return @access_token
     end
 
     def get_refresh_token
