@@ -382,28 +382,37 @@ module SuperEHR
   class DrChronoAPI < BaseEHR
 
     ### API SPECIFIC HOUSEKEEPING ###
+    attr_reader :access_token, :refresh_token
 
-    def initialize(access_code, client_id, client_secret, redirect_uri)
-      @access_code = access_code 
-      @client_id = client_id
-      @client_secret = client_secret
-      @redirect_uri = redirect_uri << '/' unless redirect_uri.end_with?('/')
-      @access_token = ''
-      @refresh_token = ''
-      @uri = URI.parse("https://drchrono.com")
-      if (access_code == '')
-        get_access_token
-      else
-        refresh_token
+    def initialize(args={})
+      params = {:access_code => '', :access_token => '', :refresh_token => '',
+                        :client_id => '', :client_secret => '', :redirect_uri => ''}
+      params = params.merge(args)
+      if (params[:access_code] == '' && (params[:access_token] == '' || params[:refresh_token] == ''))
+        raise ArgumentError, "{Access Code='#{params[:access_code]}' is blank or one or more of {Access Token='#{params[:access_token]}', Refresh Token='#{params[:refresh_token]}' is blank"
       end
+      @access_code = params[:access_code]
+      @client_id = params[:client_id]
+      @client_secret = params[:client_secret]
+      @redirect_uri = params[:redirect_uri] << '/' unless params[:redirect_uri].end_with?('/')
+      @access_token = params[:access_token] 
+      @refresh_token = params[:refresh_token] 
+      @uri = URI.parse("https://drchrono.com")
+      #if (params[:access_token] == '' || params[:refresh_token] == '')
+        refresh_token
+      #end
     end
 
     def get_request_headers
-      return { 'Authorization' => "Bearer #{@refresh_token}" }
+      return { 'Authorization' => "Bearer #{refresh_token()}" }
     end
 
     def get_request_url(endpoint)
       return "#{@uri}/#{endpoint}"
+    end
+
+    def get_refresh_token
+      return @refresh_token
     end
 
     def refresh_token
@@ -511,6 +520,10 @@ module SuperEHR
   end
 
   def self.drchrono(access_code, client_id, client_secret, redirect_uri)
-    return DrChronoAPI.new(access_code, client_id, client_secret, redirect_uri)
+    return DrChronoAPI.new({:access_code => access_code, :client_id => client_id, :client_secret => client_secret, :redirect_uri => redirect_uri})
+  end
+
+  def self.drchrono_b(access_token, refresh_token, client_id, client_secret, redirect_uri)
+    return DrChronoAPI.new({:access_token => access_token, :refresh_token => refresh_token, :client_id => client_id, :client_secret => client_secret, :redirect_uri => redirect_uri})
   end
 end
