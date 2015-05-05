@@ -22,6 +22,7 @@ allscripts = SuperEHR.allscripts('ehr_username', 'ehr_password', 'app_username',
 athena = SuperEHR.athena('version', 'key', 'secret', 'practice_id')
 
 drchrono = SuperEHR.drchrono('access_code', 'client_id', 'client_secret', 'redirect_url')
+drchrono2 = SuperEHR.drchrono_b('access_token', 'refresh_token', 'client_id', 'client_secret', 'redirect_url')
 ```
 ---
 
