@@ -25,7 +25,7 @@ module SuperEHR
       return {}
     end
 
-    def get_request_headers 
+    def get_request_headers
       return {}
     end
 
@@ -42,11 +42,9 @@ module SuperEHR
     end
 
     # make a HTTP request
-    def make_request(request_type, endpoint, request_params={}, use_default_params=true,
-                     to_json=true)
-
+    def make_request(request_type, endpoint, request_params={}, use_default_params=true, to_json=true)
       if use_default_params
-        params = get_default_params 
+        params = get_default_params
         params = params.merge(request_params)
       else
         params = request_params
@@ -136,8 +134,8 @@ module SuperEHR
 
     def get_default_params
       return {:Action => '', :AppUserID => @ehr_username, :Appname => @app_name,
-        :PatientID => '', :Token => refresh_token, 
-        :Parameter1 => '', :Parameter2 => '', :Parameter3 => '', 
+        :PatientID => '', :Token => refresh_token,
+        :Parameter1 => '', :Parameter2 => '', :Parameter3 => '',
         :Parameter4 => '', :Parameter5 => '', :Parameter6 => '', :Data => ''}
     end
 
@@ -199,7 +197,7 @@ module SuperEHR
           end
         end
       end
-      return patients 
+      return patients
     end
 
     ## UPLOAD PDF IMPLEMENTATION ##
@@ -217,14 +215,14 @@ module SuperEHR
         # first call to push the contents
         save_pdf_xml = create_pdf_xml_params(first_name, last_name,
                                              filepath, file.size, 0, "false", "", "0")
-        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id, 
+        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id,
           :Parameter1 => save_pdf_xml, :Parameter6 => buffer}
         out = make_request("POST", "json/MagicJson", params)
         # second call to push file information and wrap up upload
         doc_guid = out[0]["savedocumentimageinfo"][0]["documentVar"].to_s
         save_pdf_xml = create_pdf_xml_params(first_name, last_name,
                                              filepath, file.size, 0, "true", doc_guid, "0")
-        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id, 
+        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id,
           :Parameter1 => save_pdf_xml, :Parameter6 => nil}
         out = make_request("POST", "json/MagicJson", params)
         return out
@@ -245,14 +243,14 @@ module SuperEHR
         b.item :name => "vendorFileName", :value => file_name
         b.item :name => "ahsEncounterID", :value => 0
         b.item :name => "ownerCode", :value => get_provider_entry_code.strip
-        b.item :name => "organizationName", :value => organization_name 
+        b.item :name => "organizationName", :value => organization_name
         b.item :name => "patientFirstName", :value => first_name
         b.item :name => "patientLastName", :value => last_name
       end
       return xml.target!
     end
 
-    private 
+    private
 
     # necessary to create the xml params for upload_document
     def get_provider_entry_code()
@@ -276,10 +274,10 @@ module SuperEHR
 
     def initialize(version, key, secret, practice_id)
       @uri = URI.parse('https://api.athenahealth.com/')
-      @version = version 
-      @key = key 
-      @secret = secret 
-      @practiceid = practice_id 
+      @version = version
+      @key = key
+      @secret = secret
+      @practiceid = practice_id
     end
 
     def get_request_headers
@@ -290,7 +288,7 @@ module SuperEHR
       return "#{@uri}/#{@version}/#{@practiceid}/#{endpoint}"
     end
 
-    def refresh_token 
+    def refresh_token
       auth_paths = {
         'vi' => 'oauth',
         'preview1' => 'oauthpreview',
@@ -303,7 +301,7 @@ module SuperEHR
       params = {:grant_type => "client_credentials"}
       response = HTTParty.post(url, :body => params, :basic_auth => auth)
 
-      return response["access_token"] 
+      return response["access_token"]
     end
 
 
@@ -349,7 +347,7 @@ module SuperEHR
     end
 
     def get_scheduled_patients(date, department_id=1)
-      response = make_request("GET", "appointments/booked", 
+      response = make_request("GET", "appointments/booked",
                               {:departmentid => department_id, :startdate => date, :enddate => date})
       patients = []
       if not response["appointments"].empty?
@@ -357,7 +355,7 @@ module SuperEHR
           patients << scheduled_patient
         end
       end
-      return patients 
+      return patients
     end
 
     # might have issues if patient is in multiple departments
@@ -365,7 +363,7 @@ module SuperEHR
       endpoint = "patients/#{patient_id}/documents"
       headers = { 'Authorization' => "Bearer #{refresh_token}" }
       url = "#{@uri}/#{@version}/#{@practiceid}/#{endpoint}"
-      params = { 
+      params = {
         :departmentid => department_id != -1 ? department_id : get_patient(patient_id)["departmentid"],
         :attachmentcontents  => File.new(filepath),
         :documentsubclass    => "CLINICALDOCUMENT",
