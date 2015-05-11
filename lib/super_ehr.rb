@@ -110,9 +110,7 @@ module SuperEHR
 
     ### API SPECIFIC HOUSEKEEPING ###
 
-    def initialize(ehr_username, ehr_password='', 
-                   app_username, app_password, app_name,
-                   using_touchworks)
+    def initialize(ehr_username, ehr_password='', app_username, app_password, app_name, using_touchworks)
 
       # convert these to environment variables
       @app_username = app_username
@@ -326,9 +324,8 @@ module SuperEHR
     end
 
     # start_date needs to be in mm/dd/yyyy
-    # returns a list of patient ids that have been changed since start_date 
-    def get_changed_patients_ids(start_date, 
-                                 end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+    # returns a list of patient ids that have been changed since start_date
+    def get_changed_patients_ids(start_date, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       subscribe = make_request("GET", "patients/changed/subscription", {})
       if subscribe.has_key?("status") and subscribe["status"] == "ACTIVE"
         response = make_request("GET", "patients/changed",
