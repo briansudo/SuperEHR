@@ -434,13 +434,15 @@ module SuperEHR
 
     def get_patients(params={})
       patient_url = 'api/patients'
-      return chrono_request(patient_url, params) 
+      return chrono_request(patient_url, params)
     end
 
-    def get_changed_patients(ts)
-      date = ts.gsub(/\//, '-')
-      date = Date.strptime(date, '%m-%d-%Y')
-      return get_patients({:since => date.iso8601}) 
+    def get_changed_patients(date)
+      if self.class != SuperEHR::DrChronoAPI
+        date = date.gsub(/\//, '-')
+        date = Date.strptime(date, '%m-%d-%Y').ios8601
+      end
+      return get_patients({:since => date})
     end
 
     def get_changed_patients_ids(ts)
