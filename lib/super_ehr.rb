@@ -375,28 +375,34 @@ module SuperEHR
   end
 
   class DrChronoAPI < BaseEHR
+    attr_reader :access_token, :refresh_token
 
     ### API SPECIFIC HOUSEKEEPING ###
 
     def initialize(args={})
-      params = {:access_code => '', :access_token => '', :refresh_token => '',
-                        :client_id => '', :client_secret => '', :redirect_uri => ''}
+      params = {:access_code => '',
+                :access_token => '',
+                :refresh_token => '',
+                :client_id => '',
+                :client_secret => '',
+                :redirect_uri => ''
+              }
       params = params.merge(args)
       if (params[:access_code] == '' && (params[:access_token] == '' || params[:refresh_token] == ''))
-        raise ArgumentError, "{Access Code='#{params[:access_code]}' is blank or one or more of {Access Token='#{params[:access_token]}', Refresh Token='#{params[:refresh_token]}' is blank"
+        raise ArgumentError, "Access Code='#{params[:access_code]}' is blank or one or more of Access Token='#{params[:access_token]}', Refresh Token='#{params[:refresh_token]}' is blank"
       end
       @access_code = params[:access_code]
       @client_id = params[:client_id]
       @client_secret = params[:client_secret]
-      @redirect_uri = params[:redirect_uri] << '/' unless params[:redirect_uri].end_with?('/')
-      @access_token = params[:access_token] 
-      @refresh_token = params[:refresh_token] 
+      @redirect_uri = params[:redirect_uri]
+      @access_token = params[:access_token]
+      @refresh_token = params[:refresh_token]
       @uri = URI.parse("https://drchrono.com")
-      refresh_token
+      exchange_token
     end
 
     def get_request_headers
-      return { 'Authorization' => "Bearer #{refresh_token()}" }
+      return { 'Authorization' => "Bearer #{@access_token}"}
     end
 
     def get_request_url(endpoint)
@@ -411,42 +417,6 @@ module SuperEHR
       return @refresh_token
     end
 
-    def refresh_token
-      if @refresh_token == ''
-        response = HTTParty.post(get_request_url("o/token/"),
-                                 :body => {:code => @access_code,
-                                   :grant_type => "authorization_code",
-                                   :redirect_uri => @redirect_uri,
-                                   :client_id => @client_id,
-                                   :client_secret => @client_secret})
-        @refresh_token = response["refresh_token"]
-        @access_token = response["access_token"]
-        return response["access_token"]
-      else
-        response = HTTParty.post(get_request_url("o/token/"), 
-                                 :body => {:refresh_token => @refresh_token, 
-                                   :grant_type => "refresh_token",
-                                   :redirect_uri => @redirect_uri, 
-                                   :client_id => @client_id,
-                                   :client_secret => @client_secret})
-        @refresh_token = response["refresh_token"]
-        @access_token = response["access_token"]
-        return response["access_token"]
-      end
-
-    end
-
-    def chrono_request(endpoint, params={})
-      result = []
-      while endpoint 
-        data = make_request("GET", endpoint, params)
-        if data["results"]
-          result = result | data["results"]
-        end
-        endpoint = data["next"]
-      end
-      return result
-    end
 
     ### API CALLS ###
 
@@ -497,16 +467,59 @@ module SuperEHR
         :date => Time.now.strftime("%Y-%m-%d") << " 00:00:00",
         :document => File.new(filepath)
       }
-      response = HTTMultiParty.post(url, :body => params, :headers => headers) 
+      response = HTTMultiParty.post(url, :body => params, :headers => headers)
       return response
     end
 
+    private
+
+    def chrono_request(endpoint, params={})
+      result = []
+      while endpoint
+        data = make_request("GET", endpoint, params)
+        if data["results"]
+          result = result | data["results"]
+        end
+        endpoint = data["next"]
+      end
+      return result
+    end
+
+    def exchange_token
+      if @refresh_token == '' || @refresh_token == nil
+        post_args = {
+          "code" => @access_code,
+          "grant_type" => "authorization_code",
+          "redirect_uri" => @redirect_uri,
+          "client_id" => @client_id,
+          "client_secret" => @client_secret
+        }
+        response = HTTParty.post(get_request_url("o/token/"),
+                                 :body => post_args)
+        @refresh_token = response["refresh_token"]
+        @access_token = response["access_token"]
+        return response["access_token"]
+      else
+        post_args = {
+          "refresh_token" => @refresh_token,
+          "grant_type" => "refresh_token",
+          "redirect_uri" => @redirect_uri,
+          "client_id" => @client_id,
+          "client_secret" => @client_secret
+        }
+        response = HTTParty.post(get_request_url("o/token/"),
+                                 :body => post_args)
+        @refresh_token = response["refresh_token"]
+        @access_token = response["access_token"]
+        return response["access_token"]
+      end
+    end
   end
 
-  def self.allscripts(ehr_username, ehr_password, 
+  def self.allscripts(ehr_username, ehr_password,
                       app_username, app_password, app_name,
                       using_touchworks)
-    return AllScriptsAPI.new(ehr_username, ehr_password, 
+    return AllScriptsAPI.new(ehr_username, ehr_password,
                               app_username, app_password, app_name,
                               using_touchworks)
   end
