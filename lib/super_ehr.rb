@@ -25,7 +25,7 @@ module SuperEHR
       return {}
     end
 
-    def get_request_headers 
+    def get_request_headers
       return {}
     end
 
@@ -42,11 +42,9 @@ module SuperEHR
     end
 
     # make a HTTP request
-    def make_request(request_type, endpoint, request_params={}, use_default_params=true,
-                     to_json=true)
-
+    def make_request(request_type, endpoint, request_params={}, use_default_params=true, to_json=true)
       if use_default_params
-        params = get_default_params 
+        params = get_default_params
         params = params.merge(request_params)
       else
         params = request_params
@@ -112,9 +110,7 @@ module SuperEHR
 
     ### API SPECIFIC HOUSEKEEPING ###
 
-    def initialize(ehr_username, ehr_password='', 
-                   app_username, app_password, app_name,
-                   using_touchworks)
+    def initialize(ehr_username, ehr_password='', app_username, app_password, app_name, using_touchworks)
 
       # convert these to environment variables
       @app_username = app_username
@@ -136,8 +132,8 @@ module SuperEHR
 
     def get_default_params
       return {:Action => '', :AppUserID => @ehr_username, :Appname => @app_name,
-        :PatientID => '', :Token => refresh_token, 
-        :Parameter1 => '', :Parameter2 => '', :Parameter3 => '', 
+        :PatientID => '', :Token => refresh_token,
+        :Parameter1 => '', :Parameter2 => '', :Parameter3 => '',
         :Parameter4 => '', :Parameter5 => '', :Parameter6 => '', :Data => ''}
     end
 
@@ -199,7 +195,7 @@ module SuperEHR
           end
         end
       end
-      return patients 
+      return patients
     end
 
     ## UPLOAD PDF IMPLEMENTATION ##
@@ -217,14 +213,14 @@ module SuperEHR
         # first call to push the contents
         save_pdf_xml = create_pdf_xml_params(first_name, last_name,
                                              filepath, file.size, 0, "false", "", "0")
-        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id, 
+        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id,
           :Parameter1 => save_pdf_xml, :Parameter6 => buffer}
         out = make_request("POST", "json/MagicJson", params)
         # second call to push file information and wrap up upload
         doc_guid = out[0]["savedocumentimageinfo"][0]["documentVar"].to_s
         save_pdf_xml = create_pdf_xml_params(first_name, last_name,
                                              filepath, file.size, 0, "true", doc_guid, "0")
-        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id, 
+        params = {:Action => 'SaveDocumentImage', :PatientID => patient_id,
           :Parameter1 => save_pdf_xml, :Parameter6 => nil}
         out = make_request("POST", "json/MagicJson", params)
         return out
@@ -245,14 +241,14 @@ module SuperEHR
         b.item :name => "vendorFileName", :value => file_name
         b.item :name => "ahsEncounterID", :value => 0
         b.item :name => "ownerCode", :value => get_provider_entry_code.strip
-        b.item :name => "organizationName", :value => organization_name 
+        b.item :name => "organizationName", :value => organization_name
         b.item :name => "patientFirstName", :value => first_name
         b.item :name => "patientLastName", :value => last_name
       end
       return xml.target!
     end
 
-    private 
+    private
 
     # necessary to create the xml params for upload_document
     def get_provider_entry_code()
@@ -276,10 +272,10 @@ module SuperEHR
 
     def initialize(version, key, secret, practice_id)
       @uri = URI.parse('https://api.athenahealth.com/')
-      @version = version 
-      @key = key 
-      @secret = secret 
-      @practiceid = practice_id 
+      @version = version
+      @key = key
+      @secret = secret
+      @practiceid = practice_id
     end
 
     def get_request_headers
@@ -290,7 +286,7 @@ module SuperEHR
       return "#{@uri}/#{@version}/#{@practiceid}/#{endpoint}"
     end
 
-    def refresh_token 
+    def refresh_token
       auth_paths = {
         'vi' => 'oauth',
         'preview1' => 'oauthpreview',
@@ -303,7 +299,7 @@ module SuperEHR
       params = {:grant_type => "client_credentials"}
       response = HTTParty.post(url, :body => params, :basic_auth => auth)
 
-      return response["access_token"] 
+      return response["access_token"]
     end
 
 
@@ -328,9 +324,8 @@ module SuperEHR
     end
 
     # start_date needs to be in mm/dd/yyyy
-    # returns a list of patient ids that have been changed since start_date 
-    def get_changed_patients_ids(start_date, 
-                                 end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+    # returns a list of patient ids that have been changed since start_date
+    def get_changed_patients_ids(start_date, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       subscribe = make_request("GET", "patients/changed/subscription", {})
       if subscribe.has_key?("status") and subscribe["status"] == "ACTIVE"
         response = make_request("GET", "patients/changed",
@@ -349,7 +344,7 @@ module SuperEHR
     end
 
     def get_scheduled_patients(date, department_id=1)
-      response = make_request("GET", "appointments/booked", 
+      response = make_request("GET", "appointments/booked",
                               {:departmentid => department_id, :startdate => date, :enddate => date})
       patients = []
       if not response["appointments"].empty?
@@ -357,7 +352,7 @@ module SuperEHR
           patients << scheduled_patient
         end
       end
-      return patients 
+      return patients
     end
 
     # might have issues if patient is in multiple departments
@@ -365,7 +360,7 @@ module SuperEHR
       endpoint = "patients/#{patient_id}/documents"
       headers = { 'Authorization' => "Bearer #{refresh_token}" }
       url = "#{@uri}/#{@version}/#{@practiceid}/#{endpoint}"
-      params = { 
+      params = {
         :departmentid => department_id != -1 ? department_id : get_patient(patient_id)["departmentid"],
         :attachmentcontents  => File.new(filepath),
         :documentsubclass    => "CLINICALDOCUMENT",
@@ -380,28 +375,34 @@ module SuperEHR
   end
 
   class DrChronoAPI < BaseEHR
+    attr_reader :access_token, :refresh_token
 
     ### API SPECIFIC HOUSEKEEPING ###
 
     def initialize(args={})
-      params = {:access_code => '', :access_token => '', :refresh_token => '',
-                        :client_id => '', :client_secret => '', :redirect_uri => ''}
+      params = {:access_code => '',
+                :access_token => '',
+                :refresh_token => '',
+                :client_id => '',
+                :client_secret => '',
+                :redirect_uri => ''
+              }
       params = params.merge(args)
       if (params[:access_code] == '' && (params[:access_token] == '' || params[:refresh_token] == ''))
-        raise ArgumentError, "{Access Code='#{params[:access_code]}' is blank or one or more of {Access Token='#{params[:access_token]}', Refresh Token='#{params[:refresh_token]}' is blank"
+        raise ArgumentError, "Access Code='#{params[:access_code]}' is blank or one or more of Access Token='#{params[:access_token]}', Refresh Token='#{params[:refresh_token]}' is blank"
       end
       @access_code = params[:access_code]
       @client_id = params[:client_id]
       @client_secret = params[:client_secret]
-      @redirect_uri = params[:redirect_uri] << '/' unless params[:redirect_uri].end_with?('/')
-      @access_token = params[:access_token] 
-      @refresh_token = params[:refresh_token] 
+      @redirect_uri = params[:redirect_uri]
+      @access_token = params[:access_token]
+      @refresh_token = params[:refresh_token]
       @uri = URI.parse("https://drchrono.com")
-      refresh_token
+      exchange_token
     end
 
     def get_request_headers
-      return { 'Authorization' => "Bearer #{refresh_token()}" }
+      return { 'Authorization' => "Bearer #{@access_token}"}
     end
 
     def get_request_url(endpoint)
@@ -416,42 +417,6 @@ module SuperEHR
       return @refresh_token
     end
 
-    def refresh_token
-      if @refresh_token == ''
-        response = HTTParty.post(get_request_url("o/token/"),
-                                 :body => {:code => @access_code,
-                                   :grant_type => "authorization_code",
-                                   :redirect_uri => @redirect_uri,
-                                   :client_id => @client_id,
-                                   :client_secret => @client_secret})
-        @refresh_token = response["refresh_token"]
-        @access_token = response["access_token"]
-        return response["access_token"]
-      else
-        response = HTTParty.post(get_request_url("o/token/"), 
-                                 :body => {:refresh_token => @refresh_token, 
-                                   :grant_type => "refresh_token",
-                                   :redirect_uri => @redirect_uri, 
-                                   :client_id => @client_id,
-                                   :client_secret => @client_secret})
-        @refresh_token = response["refresh_token"]
-        @access_token = response["access_token"]
-        return response["access_token"]
-      end
-
-    end
-
-    def chrono_request(endpoint, params={})
-      result = []
-      while endpoint 
-        data = make_request("GET", endpoint, params)
-        if data["results"]
-          result = result | data["results"]
-        end
-        endpoint = data["next"]
-      end
-      return result
-    end
 
     ### API CALLS ###
 
@@ -469,13 +434,15 @@ module SuperEHR
 
     def get_patients(params={})
       patient_url = 'api/patients'
-      return chrono_request(patient_url, params) 
+      return chrono_request(patient_url, params)
     end
 
-    def get_changed_patients(ts)
-      date = ts.gsub(/\//, '-')
-      date = Date.strptime(date, '%m-%d-%Y')
-      return get_patients({:since => date.iso8601}) 
+    def get_changed_patients(date)
+      if self.class != SuperEHR::DrChronoAPI
+        date = date.gsub(/\//, '-')
+        date = Date.strptime(date, '%m-%d-%Y').ios8601
+      end
+      return get_patients({:since => date})
     end
 
     def get_changed_patients_ids(ts)
@@ -502,16 +469,59 @@ module SuperEHR
         :date => Time.now.strftime("%Y-%m-%d") << " 00:00:00",
         :document => File.new(filepath)
       }
-      response = HTTMultiParty.post(url, :body => params, :headers => headers) 
+      response = HTTMultiParty.post(url, :body => params, :headers => headers)
       return response
     end
 
+    private
+
+    def chrono_request(endpoint, params={})
+      result = []
+      while endpoint
+        data = make_request("GET", endpoint, params)
+        if data["results"]
+          result = result | data["results"]
+        end
+        endpoint = data["next"]
+      end
+      return result
+    end
+
+    def exchange_token
+      if @refresh_token == '' || @refresh_token == nil
+        post_args = {
+          "code" => @access_code,
+          "grant_type" => "authorization_code",
+          "redirect_uri" => @redirect_uri,
+          "client_id" => @client_id,
+          "client_secret" => @client_secret
+        }
+        response = HTTParty.post(get_request_url("o/token/"),
+                                 :body => post_args)
+        @refresh_token = response["refresh_token"]
+        @access_token = response["access_token"]
+        return response["access_token"]
+      else
+        post_args = {
+          "refresh_token" => @refresh_token,
+          "grant_type" => "refresh_token",
+          "redirect_uri" => @redirect_uri,
+          "client_id" => @client_id,
+          "client_secret" => @client_secret
+        }
+        response = HTTParty.post(get_request_url("o/token/"),
+                                 :body => post_args)
+        @refresh_token = response["refresh_token"]
+        @access_token = response["access_token"]
+        return response["access_token"]
+      end
+    end
   end
 
-  def self.allscripts(ehr_username, ehr_password, 
+  def self.allscripts(ehr_username, ehr_password,
                       app_username, app_password, app_name,
                       using_touchworks)
-    return AllScriptsAPI.new(ehr_username, ehr_password, 
+    return AllScriptsAPI.new(ehr_username, ehr_password,
                               app_username, app_password, app_name,
                               using_touchworks)
   end
