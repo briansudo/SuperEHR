@@ -1,3 +1,11 @@
+#Loads the lib folder into the root of the gem 
+lib = File.expand_path('../lib', __File__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+#Require this version of super_ehr
+require 'super_ehr/version'
+
+
 Gem::Specification.new do |s|
   s.name        = 'super_ehr'
   s.version     = '1.0.8'
@@ -10,4 +18,9 @@ Gem::Specification.new do |s|
   s.homepage    =
     'http://rubygems.org/gems/super_ehr'
   s.license       = 'MIT'
+
+
+  #Add dependencies for testing with RSpec
+  s.add_development_dependency "rspec"
+
 end
