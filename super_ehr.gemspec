@@ -2,8 +2,8 @@
 lib = File.expand_path('../lib', __File__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-#Require this version of super_ehr
-require 'super_ehr/version'
+# #Require this version of super_ehr
+# require 'super_ehr/version'
 
 
 Gem::Specification.new do |s|
