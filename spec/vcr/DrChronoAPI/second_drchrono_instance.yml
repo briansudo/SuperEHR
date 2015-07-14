@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://drchrono.com/o/token/
+    body:
+      encoding: UTF-8
+      string: refresh_token=SjSbrjfNqtlYKqMZKiQBaoUvqARDwF&grant_type=refresh_token&redirect_uri=http%3A%2F%2Fdashboard.ekodevices.com%2Fsync_chrono&client_id=ayIg8rp7JcN9MeD8X1TYvx5xMH50nL1NNHONhXiWm8eXW6ntIpp6WYdehVA5tBDF&client_secret=XW64OeenH5usIdDMt57vu09mPdtLdHRoJPxAWWjBd0HAikUJsMIFeqrDtPmPfhNq
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Tue, 14 Jul 2015 18:59:08 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Xss-Protection:
+      - '1'
+      X-Content-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      Vary:
+      - Cookie, User-Agent, Authorization
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      X-Frame-Options:
+      - sameorigin
+      Set-Cookie:
+      - csrftoken=3fDLZP6Rfq4s5Qk93sFsSUjRkbTsAEqc; expires=Tue, 12-Jul-2016 18:59:08
+        GMT; Max-Age=31449600; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"access_token": "56GkF9ZWRPbK2g6jZc1VFqPY2DJMAZ", "token_type": "Bearer",
+        "expires_in": 36000, "refresh_token": "WN2Lxjix9vQ0w0pye5aceZKlA8wG0R", "scope":
+        "patients labs calendar patients:summary user"}'
+    http_version: 
+  recorded_at: Tue, 14 Jul 2015 18:59:09 GMT
+recorded_with: VCR 2.9.3

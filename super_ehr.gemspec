@@ -10,4 +10,8 @@ Gem::Specification.new do |s|
   s.homepage    =
     'http://rubygems.org/gems/super_ehr'
   s.license       = 'MIT'
+
+  #Add dependencies for testing with RSpec
+  s.add_development_dependency "rspec"
+
 end

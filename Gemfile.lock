@@ -1,0 +1,71 @@
+PATH
+  remote: .
+  specs:
+    super_ehr (1.0.8)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.8)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
+    curb (0.8.8)
+    diff-lcs (1.2.5)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    httparty (0.13.5)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.3)
+    jwt (1.5.1)
+    multi_json (1.11.2)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
+    oauth2 (1.0.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
+    rack (1.6.4)
+    rack-protection (1.5.3)
+      rack
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+    rspec-core (3.3.1)
+      rspec-support (~> 3.3.0)
+    rspec-expectations (3.3.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-mocks (3.3.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-support (3.3.0)
+    safe_yaml (1.0.4)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
+    tilt (2.0.1)
+    vcr (2.9.3)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  curb
+  httparty
+  oauth2
+  rspec
+  sinatra
+  super_ehr!
+  vcr
+  webmock
+
+BUNDLED WITH
+   1.10.3

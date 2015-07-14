@@ -1,0 +1,92 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://drchrono.com/o/token/
+    body:
+      encoding: UTF-8
+      string: refresh_token=znY0DIqxj1PmmCH1ysvw0RppFfaRs5&grant_type=refresh_token&redirect_uri=http%3A%2F%2Fdashboard.ekodevices.com%2Fsync_chrono&client_id=ayIg8rp7JcN9MeD8X1TYvx5xMH50nL1NNHONhXiWm8eXW6ntIpp6WYdehVA5tBDF&client_secret=XW64OeenH5usIdDMt57vu09mPdtLdHRoJPxAWWjBd0HAikUJsMIFeqrDtPmPfhNq
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: UNAUTHORIZED
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Mon, 13 Jul 2015 18:12:49 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Xss-Protection:
+      - '1'
+      X-Content-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      Vary:
+      - Cookie, User-Agent, Authorization
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      X-Frame-Options:
+      - sameorigin
+      Set-Cookie:
+      - csrftoken=bwMgyhUhrtombfQS0IJXTfDZCvor0T7V; expires=Mon, 11-Jul-2016 18:12:49
+        GMT; Max-Age=31449600; Path=/
+    body:
+      encoding: UTF-8
+      string: '{"error": "invalid_grant"}'
+    http_version: 
+  recorded_at: Mon, 13 Jul 2015 18:12:49 GMT
+- request:
+    method: get
+    uri: https://drchrono.com/api/patients
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer
+  response:
+    status:
+      code: 401
+      message: UNAUTHORIZED
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Mon, 13 Jul 2015 18:12:49 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Xss-Protection:
+      - '1'
+      X-Content-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      Vary:
+      - User-Agent, Authorization, Cookie
+      X-Frame-Options:
+      - sameorigin
+    body:
+      encoding: UTF-8
+      string: '{"error": "Invalid OAuth token"}'
+    http_version: 
+  recorded_at: Mon, 13 Jul 2015 18:12:49 GMT
+recorded_with: VCR 2.9.3
