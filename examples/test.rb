@@ -1,4 +1,4 @@
-require_relative 'super_ehr'
+require'super_ehr'
 require 'pp'
 require 'sinatra'
 
@@ -17,7 +17,7 @@ if enable_allscripts
 
   # use touchworks ehr
   # jmedici is the ehr_username, password01 is the ehr_password
-  #a = SuperEHR.allscripts('ehr_username', 'ehr_password', 
+  a = SuperEHR.allscripts('ehr_username', 'ehr_password', 
                       'app_username', 'app_password', 'app_name',
                       true)
 
@@ -117,14 +117,16 @@ end
 
 if enable_drchrono
   
-  client_id = "client_id"
-  client_secret = "client_secret"
-  redirect_url = "redirect_url"
-  access_token_url = "https://drchrono.com/o/authorize/?redirect_uri=#{redirect_url}/&response_type=code&client_id=#{client_id}"
+  client_id = "ayIg8rp7JcN9MeD8X1TYvx5xMH50nL1NNHONhXiWm8eXW6ntIpp6WYdehVA5tBDF"
+  client_secret = "XW64OeenH5usIdDMt57vu09mPdtLdHRoJPxAWWjBd0HAikUJsMIFeqrDtPmPfhNq"
+  redirect_url = "https%3A//dashboard.ekodevices.com/sync_chrono"
+  access_token_url = "https://drchrono.com/o/authorize/?redirect_uri=#{redirect_url}/&response_type=code&client_id=#{client_id}&scopes=https://drchrono.com/api/patients/"
   system("open", access_token_url)
 
   get '/drchrono/' do
     access_code = params[:code]
+
+    pp access_code
 
     puts "\n\n\n"
 
@@ -160,7 +162,7 @@ if enable_drchrono
     pp "get_changed_patients_ids('07/01/2014')"
     pp "===="
     changed_patients = d.get_changed_patients_ids("07/01/2014")
-    pp changed_patients.join(' ')
+    pp changed_patients.join('')
 
     puts ""
 

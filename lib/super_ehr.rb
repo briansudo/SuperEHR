@@ -454,19 +454,30 @@ module SuperEHR
       return ids
     end
 
+    #Since it uses get_patient this function is very ineffecient
     def get_scheduled_patients(day='')
       url = 'api/appointments'
-      return chrono_request(url, {:date => day.gsub(/\//, '-')})
+      patients = []
+      appointments = chrono_request(url, {:date => day.gsub(/\//, '-')})
+      for appointment in appointments
+        #gives the relative url for the patient behind the api/patients namespace, we can then use Brian's existing http helpers
+        patient_url = appointment["patient"]
+        patient_id = patient_url[34..-1].to_i
+        patients << get_patient(patient_id)
+      end
+      return patients
     end
 
     def upload_document(patient_id, filepath, description)
       url = get_request_url("api/documents")
       headers = get_request_headers
+      date = Date.today
+
       params = {
         :doctor => /\/api\/doctors\/.*/.match(get_patient(patient_id)["doctor"]),
         :patient => "/api/patients/#{patient_id}",
         :description => description,
-        :date => Time.now.strftime("%Y-%m-%d") << " 00:00:00",
+        :date => date,
         :document => File.new(filepath)
       }
       response = HTTMultiParty.post(url, :body => params, :headers => headers)

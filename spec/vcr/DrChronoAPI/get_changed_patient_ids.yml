@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://drchrono.com/api/patients?since=07/13/2015
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer TxHwWh0aFgdVjspV2N0Mm8EknawPYz
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Mon, 13 Jul 2015 22:56:16 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Xss-Protection:
+      - '1'
+      X-Content-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      Vary:
+      - Accept, User-Agent, Authorization, Cookie
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Cache-Control:
+      - no-cache
+      X-Frame-Options:
+      - sameorigin
+    body:
+      encoding: UTF-8
+      string: '{"count":1,"next":null,"previous":null,"results":[{"id":4575630,"chart_id":"CACA000001","first_name":"Carly","middle_name":"","last_name":"Carlton","date_of_birth":null,"gender":"","social_security_number":"","race":"blank","ethnicity":"blank","preferred_language":"blank","home_phone":"","cell_phone":"","office_phone":"","email":"","address":"","city":"","state":"","zip_code":"","emergency_contact_name":"","emergency_contact_phone":"","emergency_contact_relation":"","employer":"","employer_address":"","employer_city":"","employer_state":"","employer_zip_code":"","disable_sms_messages":false,"doctor":"https://drchrono.com/api/doctors/53079","primary_care_physician":"","date_of_first_appointment":null,"date_of_last_appointment":null,"primary_insurance_company":"","primary_insurance_id_number":"","primary_insurance_group_number":"","primary_insurance_claim_office_number":"","primary_insurance_payer_id":"","primary_insurance_plan_name":"","primary_insurance_plan_type":"","copay":""}]}'
+    http_version: 
+  recorded_at: Mon, 13 Jul 2015 22:56:16 GMT
+recorded_with: VCR 2.9.3
