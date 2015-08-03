@@ -29,6 +29,10 @@ refresh_token = "9bdkNnBs2xWT7Wy0IwUWWTBZKySx6J"
 new_access_token = "zIa6QLb9IxeZOA4E0Y0zqgD4VMcPyE"
 new_refresh_token = "SjSbrjfNqtlYKqMZKiQBaoUvqARDwF"
 
+#third set of tokens for testing suite
+third_access_token = "etStG7r6vJeVY7CJoQfgMmm9ky9hgJ"
+third_refresh_token = "WYTGL9Nd3Ytar3Dj2qErldBG3XmeXu"
+
 
 
 RSpec.describe SuperEHR::BaseEHR do
@@ -46,23 +50,12 @@ RSpec.describe SuperEHR::DrChronoAPI do
         it "describes a drchrono instance" do
             #initializes the Dr Chrono instance that the rest of the API tests will use
             VCR.use_cassette 'DrChronoAPI/create_chrono1' do
-                response = SuperEHR.drchrono_b(access_token, refresh_token, client_id, client_secret, redirect_uri)
-                expect(response.access_token).to eq("TxHwWh0aFgdVjspV2N0Mm8EknawPYz")
-                expect(response.refresh_token).to eq("4uLEwoaPdTsRk8x0EyLCH8dzniF4mx")
+                response = SuperEHR.drchrono_b('ihDnSQWm9tC1sM6A62dikKz9aWMy3N', 'SeQa4XSk9VdxnsAZeSKe4MS3shlVsb', client_id, client_secret, redirect_uri)
                 #Gets all of the Patients from Connors account, there are 48 patients
-                VCR.use_cassette "DrChronoAPI/get_patients" do
+                VCR.use_cassette "DrChronoAPI/get_patients_please" do
                     patients = response.get_patients
-                    expect(patients.length).to eq(48)
+                    expect(patients.length).to eq(61)
                     expect(patients[0]["first_name"]).to eq("Jason")
-                end
-                #Gets patients by the id they are stored in the database, this id is used to identify the url for the patient as well; hidden behind the https://drchrono.com/api/patients/ namespace
-                VCR.use_cassette "DrChronoAPI/get_patient_by_id" do
-                    patient0 = response.get_patient(3921807)
-                    expect(patient0["chart_id"]).to eq("PAPE000001")
-                    patient1 = response.get_patient(3922255)
-                    expect(patient1["last_name"]).to eq("Test")
-                    patient2 = response.get_patient(56886648)
-                    expect(patient2["first_name"]).to eq("Jonas")
                 end
                 #Gets the patients changed after a certain date in the format MM/DD/YYYY
                 VCR.use_cassette "DrChronoAPI/get_changed_patient" do
@@ -83,25 +76,6 @@ RSpec.describe SuperEHR::DrChronoAPI do
                     expect(first_scheduled_patients[0]["first_name"]).to eq("Annie")
                     expect(first_scheduled_patients[1]["first_name"]).to eq("Jonas")
                 end
-                #Uploads a txt document of a given file path to the profile of a patient with a given patient_id
-                VCR.use_cassette "DrChronoAPI/upload_document" do 
-                    description = "sample description"
-                    patient_id = 4575630
-                    file_path = "examples/drchrono.txt"
-                    upload = response.upload_document(patient_id, file_path, description)
-                    patient_url = upload["patient"]
-                    patient_description = upload["description"]
-                    patient_id_of_upload = patient_url[34..-1].to_i
-                    expect(patient_description).to eq(description)
-                    expect(patient_id_of_upload).to eq(patient_id)
-                    document_url = upload["document"]
-                    #make curl request and compare output to the source file
-                    VCR.use_cassette "DrChronoAPI/curl_requests/test_txt" do
-                        http = Curl.get(document_url)
-                        # puts http.body_str
-                        #This test puts correctly
-                    end 
-                end
             end
         end
         it "describes another instance of dr chrono, same id and secret, different set of tokens" do
@@ -110,24 +84,37 @@ RSpec.describe SuperEHR::DrChronoAPI do
                 chrono = SuperEHR.drchrono_b(new_access_token, new_refresh_token, client_id, client_secret, redirect_uri)
                 expect(chrono.access_token).to eq("56GkF9ZWRPbK2g6jZc1VFqPY2DJMAZ")
                 expect(chrono.refresh_token).to eq("WN2Lxjix9vQ0w0pye5aceZKlA8wG0R")
+            end
+        end
+        it "describes another dr chrono instance" do
+            VCR.use_cassette "DrChronoAPI/third_drchrono_instance" do
+                response = SuperEHR.drchrono_b("f7uZi5b7GDKUB9xjlGNWbL39vqvh6t", "qDYGeHhPMXPQZbX6m2c7goqtmzaJYP", client_id, client_secret, redirect_uri)
                 #Uploads a pdf document with a given file path to the patient profile with given patient_id
                 VCR.use_cassette "DrChronoAPI/upload_pdf" do
-                    description = "sample pdf"
+                    description = "sample pdf, should return 201 code"
                     patient_id = 3333917
                     file_path = "examples/test.pdf"
-                    upload = chrono.upload_document(patient_id, file_path, description)
-                    patient_url = upload["patient"]
-                    patient_description = upload["description"]
-                    patient_id_of_upload = patient_url[34..-1].to_i
-                    expect(patient_id_of_upload).to eq(patient_id)
-                    expect(patient_description).to eq(description)
-                    new_document_url = upload["document"]
-                    puts new_document_url
+                    upload = response.upload_document(patient_id, file_path, description, 'post')
                     #visit url to see if it worked
                     #pdf is uploaded using this method
+                end
+                VCR.use_cassette "DrChronoAPI/delete_pdf" do
+                    description = "sample pdf, delete"
+                    patient_id = 3333917
+                    file_path = "examples/test.pdf"
+                    upload = response.upload_document(patient_id, file_path, description, 'delete')
+                    puts upload.inspect
+
                 end
             end
         end
 
+        it "describes the refresh token process" do
+            VCR.use_cassette "DrChronoAPI/refresh_token_test" do
+                refresh_token = "Z9S1k0cz1P30wqblavw1Gg3yjiZbuS"
+                access_token = "pnmxa7sbyDVlnYn1LFpc1vcjq"
+                response = SuperEHR.drchrono_b(access_token, refresh_token, client_id, client_secret, redirect_uri)
+            end
+        end
     end
 end

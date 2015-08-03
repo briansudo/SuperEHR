@@ -423,7 +423,7 @@ module SuperEHR
     # Not efficient
     # Get the patient using patient id from our database
     def get_patient(patient_id)
-      patients = get_patients()
+      patients = get_patients
       for patient in patients
         if patient["id"] == patient_id
           return patient
@@ -468,23 +468,55 @@ module SuperEHR
       return patients
     end
 
-    def upload_document(patient_id, filepath, description)
-      url = get_request_url("api/documents")
+    #uploads a pdf of to dr chrono
+    def upload_document(patient_id, pdf_location, description, recording, request)
       headers = get_request_headers
       date = Date.today
-
+      patient = self.get_patient(patient_id)
+      file = File.new(pdf_location)
       params = {
-        :doctor => /\/api\/doctors\/.*/.match(get_patient(patient_id)["doctor"]),
-        :patient => "/api/patients/#{patient_id}",
-        :description => description,
-        :date => date,
-        :document => File.new(filepath)
+            :doctor => /\/api\/doctors\/.*/.match(patient["doctor"]),
+            :patient => "/api/patients/#{patient_id}",
+            :description => description,
+            :date => date,
+            :document => file
       }
-      response = HTTMultiParty.post(url, :body => params, :headers => headers)
-      return response
+      if request == "post"
+        pdf_upload_request('post', params, headers, recording)
+      else
+        pdf_upload_request('put', params, headers, recording)
+      end
     end
 
     private
+
+    #Checks if there is a document with description for a given patient, if there is
+    def check_document(patient_id, description)
+      url = "api/documents"
+      headers = get_request_headers
+      params = {:patient => patient_id}
+      
+      patient_documents = chrono_request(url, params)
+      for document in patient_documents
+        if document["description"] == description
+          return document
+        end
+      end
+      return nil
+    end
+
+    #handles the request to dr crhono
+    def pdf_upload_request(request, params, headers, recording)
+      url = get_request_url("api/documents")
+      if request == 'post'
+        response = HTTMultiParty.post(url, :query => params, :headers => headers)
+        recording.update_attributes(:chrono_id => response["id"])
+      else
+        put_url = url + "/#{recording.chrono_id}"
+        response = HTTMultiParty.put(put_url, :query => params, :headers => headers)
+        recording.update_attributes(:chrono_id => response["id"])
+      end
+    end
 
     def chrono_request(endpoint, params={})
       result = []
@@ -494,6 +526,9 @@ module SuperEHR
           result = result | data["results"]
         end
         endpoint = data["next"]
+        if endpoint
+          endpoint = endpoint[20..-1]
+        end
       end
       return result
     end
@@ -522,6 +557,7 @@ module SuperEHR
         }
         response = HTTParty.post(get_request_url("o/token/"),
                                  :body => post_args)
+        puts response.inspect
         @refresh_token = response["refresh_token"]
         @access_token = response["access_token"]
         return response["access_token"]
