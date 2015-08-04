@@ -118,3 +118,14 @@ RSpec.describe SuperEHR::DrChronoAPI do
         end
     end
 end
+
+RSpec.describe SuperEHR::AllScriptsAPI do
+    describe "allscripts" do
+        it "describes an instance of allscripts" do
+
+        end
+    end
+
+end
+
+
