@@ -521,6 +521,7 @@ module SuperEHR
     def chrono_request(endpoint, params={})
       result = []
       while endpoint
+        puts endpoint
         data = make_request("GET", endpoint, params)
         if data["results"]
           result = result | data["results"]

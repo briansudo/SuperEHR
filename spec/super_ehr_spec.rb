@@ -50,7 +50,7 @@ RSpec.describe SuperEHR::DrChronoAPI do
         it "describes a drchrono instance" do
             #initializes the Dr Chrono instance that the rest of the API tests will use
             VCR.use_cassette 'DrChronoAPI/create_chrono1' do
-                response = SuperEHR.drchrono_b('ihDnSQWm9tC1sM6A62dikKz9aWMy3N', 'SeQa4XSk9VdxnsAZeSKe4MS3shlVsb', client_id, client_secret, redirect_uri)
+                response = SuperEHR.drchrono_b('e7eTuVTwdZyyELuKS0SfAV9z1nP2Z2', 'lHiwUEoO2JnCfiCFbhAiSiOVPmUCU2', client_id, client_secret, redirect_uri)
                 #Gets all of the Patients from Connors account, there are 48 patients
                 VCR.use_cassette "DrChronoAPI/get_patients_please" do
                     patients = response.get_patients

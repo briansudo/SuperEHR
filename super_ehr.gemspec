@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'super_ehr'
-  s.version     = '1.0.9'
+  s.version     = '1.0.8'
   s.date        = '2015-05-11'
   s.summary     = "Integrate with various EHR APIs seamlessly."
   s.description = "This project generalizes EHR integrations with various EHR vendors. Currently supports Allscripts, Athena, and DrChrono."
