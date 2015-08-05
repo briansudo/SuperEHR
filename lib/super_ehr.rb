@@ -474,7 +474,7 @@ module SuperEHR
       date = Date.today
       patient = self.get_patient(patient_id)
       if (patient == nil)
-        return -5
+        return -1
       else
         file = File.new(pdf_location)
         params = {
@@ -490,7 +490,7 @@ module SuperEHR
           pdf_upload_request('put', params, headers, recording)
         end
       end
-      return 5
+      return 1
     end
 
     private
@@ -562,7 +562,6 @@ module SuperEHR
         }
         response = HTTParty.post(get_request_url("o/token/"),
                                  :body => post_args)
-        puts response.inspect
         @refresh_token = response["refresh_token"]
         @access_token = response["access_token"]
         return response["access_token"]
