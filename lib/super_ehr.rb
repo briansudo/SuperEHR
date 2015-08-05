@@ -473,19 +473,24 @@ module SuperEHR
       headers = get_request_headers
       date = Date.today
       patient = self.get_patient(patient_id)
-      file = File.new(pdf_location)
-      params = {
+      if (patient == nil)
+        return -5
+      else
+        file = File.new(pdf_location)
+        params = {
             :doctor => /\/api\/doctors\/.*/.match(patient["doctor"]),
             :patient => "/api/patients/#{patient_id}",
             :description => description,
             :date => date,
             :document => file
-      }
-      if request == "post"
-        pdf_upload_request('post', params, headers, recording)
-      else
-        pdf_upload_request('put', params, headers, recording)
+        }
+        if request == "post"
+          pdf_upload_request('post', params, headers, recording)
+        else
+          pdf_upload_request('put', params, headers, recording)
+        end
       end
+      return 5
     end
 
     private
