@@ -1,23 +1,30 @@
 PATH
   remote: .
   specs:
-    super_ehr (1.0.8)
+    super_ehr (1.0.9)
 
 GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.8)
+    builder (3.2.2)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     curb (0.8.8)
     diff-lcs (1.2.5)
+    dotenv (2.0.1)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    httmultiparty (0.3.16)
+      httparty (>= 0.7.3)
+      mimemagic
+      multipart-post
     httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     json (1.8.3)
     jwt (1.5.1)
+    mimemagic (0.3.0)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -58,7 +65,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  builder
   curb
+  dotenv
+  httmultiparty
   httparty
   oauth2
   rspec

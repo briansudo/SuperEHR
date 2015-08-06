@@ -4,6 +4,9 @@ require 'httparty'
 require 'httmultiparty'
 require 'builder'
 require 'time'
+require 'dotenv'
+
+Dotenv.load
 
 module SuperEHR
 
