@@ -1,0 +1,160 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 07 Aug 2015 21:38:23 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-76.mashery.com
+      Content-Length:
+      - '126'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"bsj53z4u89wr4mv5pfrywjnv","token_type":"bearer","expires_in":3600,"refresh_token":"ub3cw8r8k2de2v7tag8ufja9"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:38:24 GMT
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 07 Aug 2015 21:38:24 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-62.mashery.com
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"mzeya7p962m89sdwukydh35w","token_type":"bearer","expires_in":3600,"refresh_token":"cnsda9vtf96be4qmqc7wmtxj"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:38:24 GMT
+- request:
+    method: get
+    uri: https://api.athenahealth.com/preview1/195900/patients/3646
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer mzeya7p962m89sdwukydh35w
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Cneonction:
+      - close
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 Aug 2015 21:38:25 GMT
+      Expires:
+      - Mon, 06 Jan 1975 16:00:00 GMT
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - d62efea7-4e41-4c85-9aec-0d164b95cbf3
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-83.mashery.com
+      Content-Length:
+      - '982'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"racename":"Patient Declined","occupationcode":null,"departmentid":"1","portalaccessgiven":"false","driverslicense":"false","ethnicitycode":null,"industrycode":null,"contacthomephone":null,"guarantorssn":null,"zip":"02139","guarantoraddresssameaspatient":"false","employerphone":null,"contactmobilephone":null,"nextkinphone":null,"portaltermsonfile":"false","status":"active","lastname":"Foo","city":"CAMBRIDGE","ssn":null,"sex":"M","privacyinformationverified":"false","primarydepartmentid":"1","balances":[{"balance":0,"departmentlist":"1,21,102,145,148,150","providergroupid":"1","cleanbalance":"true"}],"race":["declined"],"language6392code":"declined","primaryproviderid":"","patientphoto":"false","caresummarydeliverypreference":null,"firstname":"Jason","patientid":"3646","dob":"06\/18\/1987","guarantorrelationshiptopatient":"1","address1":"123
+        Any Street","guarantorphone":null,"maritalstatus":"S","countrycode":"USA","maritalstatusname":"SINGLE","countrycode3166":"US"}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:38:25 GMT
+- request:
+    method: post
+    uri: https://api.athenahealth.com/preview1/195900/patients/3646/documents
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer bsj53z4u89wr4mv5pfrywjnv
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost
+      Content-Length:
+      - '246738'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 Aug 2015 21:38:26 GMT
+      Expires:
+      - Mon, 06 Jan 1975 16:00:00 GMT
+      Nncoection:
+      - close
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - 15118d5f-c8d1-4007-a787-7f3838bacfb4
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1e-74.mashery.com
+      Content-Length:
+      - '22'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"documentid":"87945"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:38:38 GMT
+recorded_with: VCR 2.9.3

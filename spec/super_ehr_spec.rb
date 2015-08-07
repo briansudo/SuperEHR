@@ -188,10 +188,59 @@ RSpec.describe SuperEHR::AllScriptsAPI do
                     response = client.upload_document(patient_id, filepath, description)
                     expect(response[0]["savedocumentimageinfo"]).to be_an_instance_of(Array)
                 end
-
             end
         end
     end
+end
+
+
+RSpec.describe SuperEHR::AthenaAPI do
+    describe "athena_health" do
+        it "describes an instance of athena_health login" do
+            VCR.use_cassette "AthenaHealthAPI/initializeAthena" do
+                client = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 195900)
+                VCR.use_cassette "AthenaHealthAPI/get_patient_by_id" do
+                    response = client.get_patient(1)
+                    expect(response["lastname"]).to eq("Huff")
+                    expect(response["city"]).to eq("ASHBURN")
+                    expect(response["sex"]).to eq("M")
+                end
+                
+                #when running rspec, you must delete this cassette because it calls a new end_time every call
+                VCR.use_cassette "AthenaHealthAPI/get_changed_patients_ids" do
+                    response = client.get_changed_patients_ids("01/01/2015")
+                    expect(response[0]).to eq("3646")
+                    expect(response[1]).to eq("3647")
+                    expect(response.length).to eq(79)
+                end
+
+                #when running rspec, you must delete this cassette because it calls a new end_time every call
+                VCR.use_cassette "AthenaHealthAPI/get_changed_patients" do
+                    response = client.get_changed_patients("01/01/2015")
+                    expect(response[0]["patientid"]).to eq("3646")
+                    expect(response.length).to eq("79")
+                end
+
+                VCR.use_cassette "AthenaHealthAPI/get_scheduled_patients" do
+                    response = client.get_scheduled_patients("08/07/2015")
+                    expect(response.length).to eq(4)
+                end
+
+                VCR.use_cassette "AthenaHealthAPI/upload_pdf/single_department_id" do
+                    patient_id = 3646
+                    file_path = "examples/test.pdf"
+                    description = "example pdf"
+                    response = client.upload_document(patient_id, file_path, description)
+                end
+
+                #when running rspec, you must delete this cassette because it calls a new end_time every call
+                VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
+                    response = client.get_patients
+                end
+            end
+        end
+    end
+
 end
 
 

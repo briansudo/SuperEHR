@@ -282,7 +282,7 @@ module SuperEHR
     ### API SPECIFIC HOUSEKEEPING ###
 
     def initialize(version, key, secret, practice_id)
-      @uri = URI.parse('https://api.athenahealth.com/')
+      @uri = URI.parse('https://api.athenahealth.com')
       @version = version
       @key = key
       @secret = secret
@@ -299,7 +299,7 @@ module SuperEHR
 
     def refresh_token
       auth_paths = {
-        'vi' => 'oauth',
+        'v1' => 'oauth',
         'preview1' => 'oauthpreview',
         'openpreview1' => 'oauthopenpreview',
       }
@@ -316,6 +316,16 @@ module SuperEHR
 
     ### API CALLS ###
 
+
+    def get_patients
+      patients = get_changed_patients("01/01/1900", 5000)
+      return patients
+    end
+
+
+
+
+
     def get_patient(patient_id)
       response = make_request("GET", "patients/#{patient_id}", {})
       patient_info = {}
@@ -325,33 +335,30 @@ module SuperEHR
       return patient_info
     end
 
-    def get_changed_patients(ts='')
-      patient_ids = get_changed_patients_ids(ts)
-      patients = []
-      for id in patient_ids
-        patients << get_patient(id)
-      end
-      return patients
-    end
-
-    # start_date needs to be in mm/dd/yyyy
-    # returns a list of patient ids that have been changed since start_date
-    def get_changed_patients_ids(start_date, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+    def get_changed_patients(start_date, limit=1000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       subscribe = make_request("GET", "patients/changed/subscription", {})
       if subscribe.has_key?("status") and subscribe["status"] == "ACTIVE"
         response = make_request("GET", "patients/changed",
                                 { :ignorerestrictions => false,
                                   :leaveunprocessed => false,
                                   :showprocessedstartdatetime => "#{start_date} 00:00:00",
-                                  :showprocessedenddatetime => end_date })
-        patient_ids = []
-        if response.key?("patients")
-          patient_ids = response["patients"].map {|x| x["patientid"] }
-        end
-        return patient_ids
+                                  :showprocessedenddatetime => end_date, 
+                                  :limit => limit})
       else
-        return nil
+        return {}
       end
+      patients = response["patients"]
+    end
+
+    # start_date needs to be in mm/dd/yyyy
+    # returns a list of patient ids that have been changed since start_date
+    def get_changed_patients_ids(start_date, limit=1000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+      changed_patients = get_changed_patients(start_date, limit, end_date)
+      patient_ids = []
+      if changed_patients
+        patient_ids = changed_patients["patients"].map { |x| x["patientid"] }
+      end
+      return patient_ids
     end
 
     def get_scheduled_patients(date, department_id=1)
@@ -359,7 +366,8 @@ module SuperEHR
                               {:departmentid => department_id, :startdate => date, :enddate => date})
       patients = []
       if not response["appointments"].empty?
-        for scheduled_patient in response["appointments"]
+        for appointment in response["appointments"]
+          scheduled_patient = get_patient(appointment["patientid"].to_i)
           patients << scheduled_patient
         end
       end

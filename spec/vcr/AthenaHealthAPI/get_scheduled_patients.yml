@@ -1,0 +1,400 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 07 Aug 2015 21:29:30 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1d-84.mashery.com
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"fuk3cbx5yppcxvvp42r2upky","token_type":"bearer","expires_in":3600,"refresh_token":"tjdcgb8mmg9hmz368rjpva8w"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:31 GMT
+- request:
+    method: get
+    uri: https://api.athenahealth.com/preview1/195900/appointments/booked?departmentid=1&enddate=08/07/2015&startdate=08/07/2015
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer fuk3cbx5yppcxvvp42r2upky
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 Aug 2015 21:29:31 GMT
+      Expires:
+      - Mon, 06 Jan 1975 16:00:00 GMT
+      Nncoection:
+      - close
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - eaab09e1-f472-4fe3-9703-8f1d6e3edefa
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1e-74.mashery.com
+      Content-Length:
+      - '2050'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"totalcount":4,"appointments":[{"date":"08\/07\/2015","appointmentid":"368030","departmentid":"1","scheduledby":"pcarroll8","lastmodifiedby":"pcarroll8","appointmenttype":"Physical
+        Exam","providerid":"71","scheduleddatetime":"07\/09\/2015 16:14:24","templateappointmentid":"368030","starttime":"08:30","appointmentstatus":"f","patientid":"4700","duration":"15","templateappointmenttypeid":"82","copay":0,"appointmenttypeid":"4","lastmodified":"07\/30\/2015
+        05:38:44","coordinatorenterprise":"false","patientappointmenttypename":"Physical
+        Exam Visit"},{"date":"08\/07\/2015","appointmentid":"369801","departmentid":"1","scheduledby":"API-1807","lastmodifiedby":"API-1807","appointmenttype":"Any
+        15","providerid":"71","scheduleddatetime":"08\/06\/2015 09:40:18","templateappointmentid":"369801","starttime":"10:15","appointmentstatus":"f","patientid":"4974","duration":"15","templateappointmenttypeid":"82","copay":0,"appointmenttypeid":"82","lastmodified":"08\/06\/2015
+        09:40:18","coordinatorenterprise":"false","patientappointmenttypename":"Any
+        15"},{"date":"08\/07\/2015","appointmentid":"371067","departmentid":"1","scheduledby":"API-1803","lastmodifiedby":"API-1803","appointmenttype":"Any
+        15","providerid":"71","scheduleddatetime":"08\/06\/2015 06:41:06","templateappointmentid":"371067","starttime":"11:30","appointmentstatus":"f","patientid":"4973","duration":"15","templateappointmenttypeid":"82","copay":0,"appointmenttypeid":"82","lastmodified":"08\/06\/2015
+        06:41:06","coordinatorenterprise":"false","patientappointmenttypename":"Any
+        15"},{"date":"08\/07\/2015","appointmentid":"372845","departmentid":"1","scheduledby":"API-1423","lastmodifiedby":"API-1423","appointmenttype":"Any
+        15","providerid":"71","scheduleddatetime":"07\/27\/2015 03:25:02","templateappointmentid":"372845","starttime":"14:15","appointmentstatus":"f","patientid":"4824","duration":"15","templateappointmenttypeid":"82","copay":0,"appointmenttypeid":"82","lastmodified":"07\/27\/2015
+        03:25:02","coordinatorenterprise":"false","patientappointmenttypename":"Any
+        15"}]}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:31 GMT
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 07 Aug 2015 21:29:31 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-83.mashery.com
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"angzsxqzjfvv2hjtapkqw4pj","token_type":"bearer","expires_in":3600,"refresh_token":"pmmm5fysafwm2sbp4nagdewd"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:32 GMT
+- request:
+    method: get
+    uri: https://api.athenahealth.com/preview1/195900/patients/4700
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer angzsxqzjfvv2hjtapkqw4pj
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 Aug 2015 21:29:32 GMT
+      Expires:
+      - Mon, 06 Jan 1975 16:00:00 GMT
+      Nncoection:
+      - close
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - 5c25c60a-aa63-414f-9129-8b214a22a7d8
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-52.mashery.com
+      Content-Length:
+      - '1041'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"occupationcode":null,"departmentid":"1","homephone":"6174028989","portalaccessgiven":"false","driverslicense":"false","ethnicitycode":null,"industrycode":null,"contacthomephone":null,"guarantorssn":null,"guarantordob":"01\/01\/1945","zip":"02472","guarantoraddresssameaspatient":"false","employerphone":null,"contactmobilephone":null,"nextkinphone":null,"portaltermsonfile":"false","status":"active","lastname":"Test","guarantorfirstname":"Beth","city":"WATERTOWN","ssn":null,"sex":"F","privacyinformationverified":"false","primarydepartmentid":"1","balances":[{"balance":0,"departmentlist":"1,21,102,145,148,150","providergroupid":"1","cleanbalance":"true"}],"race":[],"language6392code":null,"primaryproviderid":"71","patientphoto":"false","hasmobile":"false","caresummarydeliverypreference":"PORTAL","guarantorlastname":"Test","firstname":"Beth","state":"MA","patientid":"4700","dob":"01\/01\/1945","guarantorrelationshiptopatient":"1","address1":"112
+        Main St","guarantorphone":"6174028989","countrycode":"USA","countrycode3166":"US"}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:32 GMT
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 07 Aug 2015 21:29:32 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1d-60.mashery.com
+      Content-Length:
+      - '126'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"mmcnnb6zp6vttrn2azep6cyz","token_type":"bearer","expires_in":3600,"refresh_token":"k6zrm3phjncuws5g3vxy78qh"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:33 GMT
+- request:
+    method: get
+    uri: https://api.athenahealth.com/preview1/195900/patients/4974
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer mmcnnb6zp6vttrn2azep6cyz
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Cneonction:
+      - close
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 Aug 2015 21:29:33 GMT
+      Expires:
+      - Mon, 06 Jan 1975 16:00:00 GMT
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - 6b9063b9-da13-447e-8845-8e81d542a7f4
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1d-81.mashery.com
+      Content-Length:
+      - '922'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"occupationcode":null,"departmentid":"1","homephone":"3302322345","portalaccessgiven":"false","driverslicense":"false","ethnicitycode":null,"industrycode":null,"contacthomephone":null,"guarantorssn":null,"zip":"43050","guarantoraddresssameaspatient":"false","employerphone":null,"contactmobilephone":null,"nextkinphone":null,"portaltermsonfile":"false","status":"active","lastname":"Ham","city":"MOUNT
+        VERNON","ssn":null,"privacyinformationverified":"false","primarydepartmentid":"1","balances":[{"balance":0,"departmentlist":"1,21,102,145,148,150","providergroupid":"1","cleanbalance":"true"}],"race":[],"language6392code":null,"primaryproviderid":"","patientphoto":"false","mobilephone":"3302322345","hasmobile":"true","caresummarydeliverypreference":null,"firstname":"Brian","state":"OH","patientid":"4974","dob":"01\/21\/1980","guarantorrelationshiptopatient":"1","address1":"123
+        Test Avenue","guarantorphone":null}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:33 GMT
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 07 Aug 2015 21:29:33 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-52.mashery.com
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"z54g4aqh54qknz26qujhgq5m","token_type":"bearer","expires_in":3600,"refresh_token":"8x4nkct635fsumuxdg6g4xsm"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:34 GMT
+- request:
+    method: get
+    uri: https://api.athenahealth.com/preview1/195900/patients/4973
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer z54g4aqh54qknz26qujhgq5m
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Cneonction:
+      - close
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 Aug 2015 21:29:34 GMT
+      Expires:
+      - Mon, 06 Jan 1975 16:00:00 GMT
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - 71914248-42c2-40bf-b81f-6c2a22af8741
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-77.mashery.com
+      Content-Length:
+      - '948'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"email":"test@hotmail.com","occupationcode":null,"departmentid":"1","homephone":"5012221111","portalaccessgiven":"false","driverslicense":"false","ethnicitycode":null,"industrycode":null,"contacthomephone":null,"guarantorssn":null,"zip":"71901","guarantoraddresssameaspatient":"false","employerphone":null,"contactmobilephone":null,"nextkinphone":null,"portaltermsonfile":"false","status":"active","lastname":"Smithy","city":"HOT
+        SPRINGS","ssn":null,"privacyinformationverified":"false","primarydepartmentid":"1","balances":[{"balance":0,"departmentlist":"1,21,102,145,148,150","providergroupid":"1","cleanbalance":"true"}],"race":[],"language6392code":null,"primaryproviderid":"","patientphoto":"false","mobilephone":"5013334444","hasmobile":"true","caresummarydeliverypreference":null,"firstname":"Bob","state":"AR","patientid":"4973","dob":"06\/06\/1966","guarantorrelationshiptopatient":"1","address1":"100
+        Center St.","guarantorphone":null}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:34 GMT
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 07 Aug 2015 21:29:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1e-72.mashery.com
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"k4x9ex6dcpzdpxzzgbbb57x8","token_type":"bearer","expires_in":3600,"refresh_token":"jqcesv756ze3ckrtc4kju9td"}'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:35 GMT
+- request:
+    method: get
+    uri: https://api.athenahealth.com/preview1/195900/patients/4824
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer k4x9ex6dcpzdpxzzgbbb57x8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Cneonction:
+      - close
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 Aug 2015 21:29:35 GMT
+      Expires:
+      - Mon, 06 Jan 1975 16:00:00 GMT
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - 36e46f14-9134-44a6-8662-f79cc7b7104d
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1e-71.mashery.com
+      Content-Length:
+      - '795'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"occupationcode":null,"departmentid":"1","portalaccessgiven":"false","driverslicense":"false","ethnicitycode":null,"industrycode":null,"contacthomephone":null,"guarantorssn":null,"zip":"382405","guarantoraddresssameaspatient":"false","employerphone":null,"contactmobilephone":null,"nextkinphone":null,"portaltermsonfile":"false","status":"active","lastname":"Testinng","ssn":null,"privacyinformationverified":"false","primarydepartmentid":"1","balances":[{"balance":0,"departmentlist":"1,21,102,145,148,150","providergroupid":"1","cleanbalance":"true"}],"race":[],"language6392code":null,"primaryproviderid":"","patientphoto":"false","caresummarydeliverypreference":null,"firstname":"Testing","patientid":"4824","dob":"10\/31\/1988","guarantorrelationshiptopatient":"1","guarantorphone":null}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 21:29:35 GMT
+recorded_with: VCR 2.9.3
