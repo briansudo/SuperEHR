@@ -11,3 +11,4 @@ gem 'webmock'
 gem 'builder'
 gem 'curb'
 gem 'dotenv', :groups => [:development, :test]
+gem "pry-byebug"

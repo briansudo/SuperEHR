@@ -5,6 +5,7 @@ require 'httmultiparty'
 require 'builder'
 require 'time'
 require 'dotenv'
+require "pry-byebug"
 
 Dotenv.load
 
@@ -156,6 +157,7 @@ module SuperEHR
 
     ### API CALLS ###
 
+    #tested
     def get_patient(patient_id)
       params = {:Action => 'GetPatient', :PatientID => patient_id}
       response = make_request("POST", "json/MagicJson", params)[0]
@@ -193,7 +195,9 @@ module SuperEHR
       patients = []
       if response.key?("getscheduleinfo")
         if not response["getscheduleinfo"].empty?
-          for scheduled_patient in response["getscheduleinfo"]
+          for schedule_block in response["getscheduleinfo"]
+            patientid = schedule_block["patientID"]
+            scheduled_patient = get_patient(patientid)
             patients << scheduled_patient
           end
         end
@@ -220,6 +224,7 @@ module SuperEHR
           :Parameter1 => save_pdf_xml, :Parameter6 => buffer}
         out = make_request("POST", "json/MagicJson", params)
         # second call to push file information and wrap up upload
+        puts out
         doc_guid = out[0]["savedocumentimageinfo"][0]["documentVar"].to_s
         save_pdf_xml = create_pdf_xml_params(first_name, last_name,
                                              filepath, file.size, 0, "true", doc_guid, "0")
@@ -257,7 +262,11 @@ module SuperEHR
     def get_provider_entry_code()
       params = {:Action => 'GetProvider', :Parameter2 => @ehr_username}
       out = make_request("POST", "json/MagicJson", params)
-      return out[0]["getproviderinfo"][0]["EntryCode"]
+      if @using_touchworks
+        return out[0]["getproviderinfo"][0]["EntryCode"]
+      else
+        return out[1]["getproviderinfo1"][0]["EntryCode"]
+      end
     end
 
     def get_encounter(patient_id)
