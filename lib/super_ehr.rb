@@ -224,7 +224,6 @@ module SuperEHR
           :Parameter1 => save_pdf_xml, :Parameter6 => buffer}
         out = make_request("POST", "json/MagicJson", params)
         # second call to push file information and wrap up upload
-        puts out
         doc_guid = out[0]["savedocumentimageinfo"][0]["documentVar"].to_s
         save_pdf_xml = create_pdf_xml_params(first_name, last_name,
                                              filepath, file.size, 0, "true", doc_guid, "0")
