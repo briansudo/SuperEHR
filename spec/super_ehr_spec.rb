@@ -31,42 +31,91 @@ third_access_token = "etStG7r6vJeVY7CJoQfgMmm9ky9hgJ"
 third_refresh_token = "WYTGL9Nd3Ytar3Dj2qErldBG3XmeXu"
 
 
+RSpec.describe SuperEHR do
+
+    describe ".drchrono_b" do
+        it "initializes SuperEHR as Dr Chrono instance" do
+            VCR.use_cassette 'DrChronoAPI/create_chrono1' do
+                response = SuperEHR.drchrono_b('e7eTuVTwdZyyELuKS0SfAV9z1nP2Z2', 'lHiwUEoO2JnCfiCFbhAiSiOVPmUCU2', ENV["CHRONO_CLIENT_ID"], ENV["CHRONO_CLIENT_SECRET"], redirect_uri)
+                expect(response).to be_a SuperEHR::DrChronoAPI
+            end
+        end
+    end
+
+    describe ".allscripts" do
+        it "initializes SuperEHR as Allscripts instance" do
+            VCR.use_cassette "AllScriptsAPI/create_allscripts" do
+                response = SuperEHR.allscripts("jmedici", "password01", ENV["ALLSCRIPTS_APP_USERNAME"], ENV["ALLSCRIPTS_APP_PASSWORD"], ENV["ALLSCRIPTS_APP_NAME"], true)
+                expect(response).to be_a SuperEHR::AllScriptsAPI
+            end
+        end
+    end
+
+    describe ".athena" do
+        it "initializes SuperEHR as Athena instance" do
+            VCR.use_cassette "AthenaHealthAPI/initializeAthena" do
+                response = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 195900)
+                expect(response).to be_a SuperEHR::AthenaAPI
+
+            end
+        end
+    end
+end
+
 
 RSpec.describe SuperEHR::BaseEHR do
-    it "Initilize BaseEHR" do
+    it "initilizes BaseEHR with default parameters" do
         base_ehr = SuperEHR::BaseEHR.new
-        base_ehr.get_default_params.should == {}
-        base_ehr.get_request_headers.should == {}
-        base_ehr.get_request_body.should == {}
+        expect(base_ehr.get_default_params).to eq({})
+        expect(base_ehr.get_request_headers).to eq({})
+        expect(base_ehr.get_request_body).to eq({})
         #base_ehr.get_patient(1).should_receive(:error)
     end
 end
 
+
 RSpec.describe SuperEHR::DrChronoAPI do
-    describe "Chrono" do
-        it "describes a drchrono instance" do
-            #initializes the Dr Chrono instance that the rest of the API tests will use
-            VCR.use_cassette 'DrChronoAPI/create_chrono1' do
-                response = SuperEHR.drchrono_b('e7eTuVTwdZyyELuKS0SfAV9z1nP2Z2', 'lHiwUEoO2JnCfiCFbhAiSiOVPmUCU2', ENV["CHRONO_CLIENT_ID"], ENV["CHRONO_CLIENT_SECRET"], redirect_uri)
-                #Gets all of the Patients from Connors account, there are 48 patients
+    #initialize the Dr Chrono instance that the rest of the API tests will use
+    VCR.use_cassette 'DrChronoAPI/create_chrono1' do
+
+        response = SuperEHR.drchrono_b('e7eTuVTwdZyyELuKS0SfAV9z1nP2Z2', 'lHiwUEoO2JnCfiCFbhAiSiOVPmUCU2', ENV["CHRONO_CLIENT_ID"], ENV["CHRONO_CLIENT_SECRET"], redirect_uri)
+
+        #Gets all of the Patients from Connors account, there are 48 patients
+        describe "#get_patients" do
+            it "gets all patients from users account" do
                 VCR.use_cassette "DrChronoAPI/get_patients_please" do
                     patients = response.get_patients
                     expect(patients.length).to eq(61)
                     expect(patients[0]["first_name"]).to eq("Jason")
                 end
-                #Gets the patients changed after a certain date in the format MM/DD/YYYY
+            end
+        end
+
+        #Gets the patients changed after a certain date in the format MM/DD/YYYY
+        describe "#get_changed_patients" do
+            it "gets all changed patients since agiven date" do
                 VCR.use_cassette "DrChronoAPI/get_changed_patient" do
                     changed_patients = response.get_changed_patients("07/13/2015")
                     expect(changed_patients[0]["first_name"]).to eq("Carly")
                     expect(changed_patients[1]).to eq(nil)
                 end
-                #Gets the id's of all the patients changed after a given date in the format MM/DD/YYYY
+            end
+        end
+
+        #Gets the id's of all the patients changed after a given date in the format MM/DD/YYYY
+        describe "get_changed_patients_ids" do
+            it "gets the id's of changed patients since a given date" do
                 VCR.use_cassette "DrChronoAPI/get_changed_patient_ids" do
                     first_changed_patients = response.get_changed_patients_ids("07/13/2015")
                     expect(first_changed_patients.length).to eq(1)
                     expect(first_changed_patients[0]).to eq(4575630)
                 end
-                #Gets all the scheduled patients on a certain date in the format MM/DD/YYYY
+            end
+        end
+
+        #Gets all the scheduled patients on a certain date in the format MM/DD/YYYY
+        describe "#get_scheduled_patients" do
+            it "gets all scheduled patients on a given date" do
                 VCR.use_cassette "DrChronoAPI/get_scheduled_patients" do
                     first_scheduled_patients = response.get_scheduled_patients("07/13/2015")
                     expect(first_scheduled_patients.length).to eq(2)
@@ -75,7 +124,11 @@ RSpec.describe SuperEHR::DrChronoAPI do
                 end
             end
         end
-        it "describes another instance of dr chrono, same id and secret, different set of tokens" do
+
+    end
+
+    context "when different set of tokens" do
+        it "retrieves new access token with refresh token" do
             #Initializes another dr chrono instance since the session with the original expired, new access_token and refresh_token, same id and secret so the data for this chrono instance should be the same as the original
             VCR.use_cassette "DrChronoAPI/second_drchrono_instance" do
                 chrono = SuperEHR.drchrono_b(new_access_token, new_refresh_token, ENV["CHRONO_CLIENT_ID"], ENV["CHRONO_CLIENT_SECRET"], redirect_uri)
@@ -83,6 +136,7 @@ RSpec.describe SuperEHR::DrChronoAPI do
                 expect(chrono.refresh_token).to eq("WN2Lxjix9vQ0w0pye5aceZKlA8wG0R")
             end
         end
+
         # it "describes another dr chrono instance" do
         #     VCR.use_cassette "DrChronoAPI/third_drchrono_instance" do
         #         response = SuperEHR.drchrono_b("f7uZi5b7GDKUB9xjlGNWbL39vqvh6t", "qDYGeHhPMXPQZbX6m2c7goqtmzaJYP", ENV["CHRONO_CLIENT_ID"], ENV["CHRONO_CLIENT_SECRET"], redirect_uri)
@@ -106,11 +160,12 @@ RSpec.describe SuperEHR::DrChronoAPI do
         #     end
         # end
 
-        it "describes the refresh token process" do
+        it "initializes new instance of Dr Chrono with refresh token" do
             VCR.use_cassette "DrChronoAPI/refresh_token_test" do
                 refresh_token = "Z9S1k0cz1P30wqblavw1Gg3yjiZbuS"
                 access_token = "pnmxa7sbyDVlnYn1LFpc1vcjq"
                 response = SuperEHR.drchrono_b(access_token, refresh_token, ENV["CHRONO_CLIENT_ID"], ENV["CHRONO_CLIENT_SECRET"], redirect_uri)
+                expect(response.access_token).to eq("Lb7CGck0eaEwVL3Vvmmo1atSucsNnm")
             end
         end
     end
@@ -126,7 +181,7 @@ RSpec.describe SuperEHR::AllScriptsAPI do
                     expect(patient).to be_an_instance_of(Hash)
                 end
 
-                VCR.use_cassette "AllScriptsAPI/Touchworks/get_changed_patients_ids" do 
+                VCR.use_cassette "AllScriptsAPI/Touchworks/get_changed_patients_ids" do
                     patient_ids = client.get_changed_patients_ids(Date.today)
                     expect(patient_ids.length).to eq(10)
                 end
@@ -157,7 +212,7 @@ RSpec.describe SuperEHR::AllScriptsAPI do
             end
         end
         it "describes an instance of professional AllScriptsAPI" do
-            VCR.use_cassette "AllScriptsAPI/Professional/create_allscripts" do 
+            VCR.use_cassette "AllScriptsAPI/Professional/create_allscripts" do
                 client = SuperEHR.allscripts("terry", "manning", ENV["ALLSCRIPTS_APP_USERNAME"], ENV["ALLSCRIPTS_APP_PASSWORD"], ENV["ALLSCRIPTS_APP_NAME"], false)
                 VCR.use_cassette "AllScriptsAPI/Professional/get_patient" do
                     patient = client.get_patient(1)
@@ -178,7 +233,7 @@ RSpec.describe SuperEHR::AllScriptsAPI do
 
                 VCR.use_cassette "AllScriptsAPI/Professional/get_scheduled_patients" do
                     scheduled_patients = client.get_scheduled_patients(Date.today)
-                    expect(scheduled_patients).to eq([]) 
+                    expect(scheduled_patients).to eq([])
                 end
 
                 VCR.use_cassette "AllScriptsAPI/Professional/upload_pdf" do
@@ -195,52 +250,71 @@ end
 
 
 RSpec.describe SuperEHR::AthenaAPI do
-    describe "athena_health" do
-        it "describes an instance of athena_health login" do
-            VCR.use_cassette "AthenaHealthAPI/initializeAthena" do
-                client = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 195900)
+
+    VCR.use_cassette "AthenaHealthAPI/initializeAthena" do
+
+        client = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 195900)
+
+        describe "#get_patient" do
+            it "gets all patients from users account" do
                 VCR.use_cassette "AthenaHealthAPI/get_patient_by_id" do
                     response = client.get_patient(1)
                     expect(response["lastname"]).to eq("Huff")
                     expect(response["city"]).to eq("ASHBURN")
                     expect(response["sex"]).to eq("M")
                 end
-                
+            end
+        end
+
+        describe "#get_changed_patients_ids" do
+            it "gets the id's of changed patients since agiven date" do
                 #when running rspec, you must delete this cassette because it calls a new end_time every call
                 VCR.use_cassette "AthenaHealthAPI/get_changed_patients_ids" do
                     response = client.get_changed_patients_ids("01/01/2015")
                     expect(response[0]).to eq("3646")
                     expect(response[1]).to eq("3647")
-                    expect(response.length).to eq(79)
+                    expect(response.length).to eq(1074)
                 end
+            end
+        end
 
+        describe "#get_changed_patients" do
+            it "gets all changed patients since a given date" do
                 #when running rspec, you must delete this cassette because it calls a new end_time every call
                 VCR.use_cassette "AthenaHealthAPI/get_changed_patients" do
+
                     response = client.get_changed_patients("01/01/2015")
                     expect(response[0]["patientid"]).to eq("3646")
-                    expect(response.length).to eq("79")
+                    expect(response.length).to eq(1074)
                 end
+            end
+        end
 
+        describe "#get_scheduled_patients" do
+            it "gets all scheduled patients on a given date" do
                 VCR.use_cassette "AthenaHealthAPI/get_scheduled_patients" do
                     response = client.get_scheduled_patients("08/07/2015")
                     expect(response.length).to eq(4)
                 end
+            end
+        end
 
+        describe "#upload_document" do
+            it "uploads a PDF to a patients record" do
                 VCR.use_cassette "AthenaHealthAPI/upload_pdf/single_department_id" do
                     patient_id = 3646
                     file_path = "examples/test.pdf"
                     description = "example pdf"
                     response = client.upload_document(patient_id, file_path, description)
                 end
-
-                #when running rspec, you must delete this cassette because it calls a new end_time every call
-                VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
-                    response = client.get_patients
-                end
             end
         end
-    end
 
+        #when running rspec, you must delete this cassette because it calls a new end_time every call
+        VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
+            response = client.get_patients
+        end
+    end
 end
 
 
