@@ -322,10 +322,6 @@ module SuperEHR
       return patients
     end
 
-
-
-
-
     def get_patient(patient_id)
       response = make_request("GET", "patients/#{patient_id}", {})
       patient_info = {}
@@ -335,28 +331,30 @@ module SuperEHR
       return patient_info
     end
 
-    def get_changed_patients(start_date, limit=1000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+    def get_changed_patients(start_date, limit=5000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       subscribe = make_request("GET", "patients/changed/subscription", {})
       if subscribe.has_key?("status") and subscribe["status"] == "ACTIVE"
-        response = make_request("GET", "patients/changed",
+        response = make_athena_request("patients/changed",
                                 { :ignorerestrictions => false,
                                   :leaveunprocessed => false,
                                   :showprocessedstartdatetime => "#{start_date} 00:00:00",
                                   :showprocessedenddatetime => end_date, 
                                   :limit => limit})
       else
-        return {}
+        return []
       end
-      patients = response["patients"]
+      return response
     end
 
     # start_date needs to be in mm/dd/yyyy
     # returns a list of patient ids that have been changed since start_date
-    def get_changed_patients_ids(start_date, limit=1000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+    def get_changed_patients_ids(start_date, limit=5000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       changed_patients = get_changed_patients(start_date, limit, end_date)
       patient_ids = []
       if changed_patients
-        patient_ids = changed_patients["patients"].map { |x| x["patientid"] }
+        changed_patients.each do |changed_patient|
+          patient_ids << changed_patient["patientid"]
+        end
       end
       return patient_ids
     end
@@ -390,6 +388,23 @@ module SuperEHR
         response = HTTMultiParty.post(url, :body => params, :headers => headers)
         return response
     end
+
+
+    private 
+
+      #Iterates through the pagintized json responses
+      def make_athena_request(endpoint, params={})
+        binding.pry
+        result = []
+        while endpoint
+          data = make_request("GET", endpoint, params)
+          if data["patients"]
+            result = result | data["patients"]
+          end
+            endpoint = data["next"]
+        end
+        return result
+      end
 
   end
 

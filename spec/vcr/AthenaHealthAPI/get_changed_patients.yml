@@ -17,22 +17,22 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Mon, 10 Aug 2015 16:49:41 GMT
+      - Mon, 10 Aug 2015 16:47:19 GMT
       Pragma:
       - no-cache
       Server:
       - Mashery Proxy
       X-Mashery-Responder:
-      - prod-j-worker-us-east-1d-69.mashery.com
-      Transfer-Encoding:
-      - chunked
+      - prod-j-worker-us-east-1b-80.mashery.com
+      Content-Length:
+      - '126'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"access_token":"84tev6usfvmz6rrvrshb34jw","token_type":"bearer","expires_in":3600,"refresh_token":"rn3exv5zjjmgret7r8eb8vs2"}'
+      string: '{"access_token":"68e96v6j6w7nj3txjebgv7we","token_type":"bearer","expires_in":3600,"refresh_token":"xbzm9ng2ec6qh3t2dpm9c749"}'
     http_version: 
-  recorded_at: Mon, 10 Aug 2015 16:49:41 GMT
+  recorded_at: Mon, 10 Aug 2015 16:47:20 GMT
 - request:
     method: get
     uri: https://api.athenahealth.com/preview1/195900/patients/changed/subscription
@@ -41,7 +41,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer 84tev6usfvmz6rrvrshb34jw
+      - Bearer 68e96v6j6w7nj3txjebgv7we
   response:
     status:
       code: 200
@@ -52,7 +52,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 10 Aug 2015 16:49:41 GMT
+      - Mon, 10 Aug 2015 16:47:20 GMT
       Expires:
       - Mon, 06 Jan 1975 16:00:00 GMT
       Nncoection:
@@ -64,9 +64,9 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Mashery-Message-Id:
-      - d8757a77-da67-4de2-b638-a0d6e366e582
+      - 4e88fe12-a641-4262-81f5-16cf4b221db4
       X-Mashery-Responder:
-      - prod-j-worker-us-east-1d-70.mashery.com
+      - prod-j-worker-us-east-1d-68.mashery.com
       Content-Length:
       - '19'
       Connection:
@@ -75,7 +75,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"status":"ACTIVE"}'
     http_version: 
-  recorded_at: Mon, 10 Aug 2015 16:49:42 GMT
+  recorded_at: Mon, 10 Aug 2015 16:47:20 GMT
 - request:
     method: post
     uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
@@ -93,31 +93,31 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Mon, 10 Aug 2015 16:49:45 GMT
+      - Mon, 10 Aug 2015 16:47:22 GMT
       Pragma:
       - no-cache
       Server:
       - Mashery Proxy
       X-Mashery-Responder:
-      - prod-j-worker-us-east-1d-68.mashery.com
-      Content-Length:
-      - '126'
+      - prod-j-worker-us-east-1e-72.mashery.com
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"access_token":"ec6rbngegebuq8ar7h3ptn88","token_type":"bearer","expires_in":3600,"refresh_token":"feht2sc6hp6dggm6brhr23ax"}'
+      string: '{"access_token":"ykcdx5x8r5n933t83y6jqc7e","token_type":"bearer","expires_in":3600,"refresh_token":"f7pbdut569b7t3hwyz935qgh"}'
     http_version: 
-  recorded_at: Mon, 10 Aug 2015 16:49:46 GMT
+  recorded_at: Mon, 10 Aug 2015 16:47:23 GMT
 - request:
     method: get
-    uri: https://api.athenahealth.com/preview1/195900/patients/changed?ignorerestrictions=false&leaveunprocessed=false&limit=5000&showprocessedenddatetime=08/10/2015%2012:49:41&showprocessedstartdatetime=01/01/1900%2000:00:00
+    uri: https://api.athenahealth.com/preview1/195900/patients/changed?ignorerestrictions=false&leaveunprocessed=false&limit=5000&showprocessedenddatetime=08/10/2015%2012:47:19&showprocessedstartdatetime=01/01/2015%2000:00:00
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Authorization:
-      - Bearer ec6rbngegebuq8ar7h3ptn88
+      - Bearer ykcdx5x8r5n933t83y6jqc7e
   response:
     status:
       code: 200
@@ -128,7 +128,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 10 Aug 2015 16:49:46 GMT
+      - Mon, 10 Aug 2015 16:47:23 GMT
       Expires:
       - Mon, 06 Jan 1975 16:00:00 GMT
       Nncoection:
@@ -140,9 +140,9 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Mashery-Message-Id:
-      - 2a514b66-86c1-471e-9dab-ac2c33f51091
+      - 7835ca74-a3b6-4470-b00e-f9766e72baa6
       X-Mashery-Responder:
-      - prod-j-worker-us-east-1d-69.mashery.com
+      - prod-j-worker-us-east-1b-56.mashery.com
       Content-Length:
       - '710527'
       Connection:
@@ -506,5 +506,5 @@ http_interactions:
         Arsenal St","guarantorphone":"5555545656","maritalstatus":"U","countrycode":"USA","maritalstatusname":"UNKNOWN","guarantormiddlename":"E","countrycode3166":"US"},{"occupationcode":null,"departmentid":"102","ethnicitycode":null,"industrycode":null,"contacthomephone":null,"guarantorssn":null,"zip":"60606","guarantoraddresssameaspatient":"false","employerphone":null,"contactmobilephone":null,"nextkinphone":null,"portaltermsonfile":"false","status":"active","lastname":"Test","city":"CHICAGO","ssn":null,"privacyinformationverified":"false","primarydepartmentid":"102","race":[],"language6392code":null,"primaryproviderid":"","caresummarydeliverypreference":null,"firstname":"Passport","state":"IL","patientid":"4674","dob":"01\/01\/1970","guarantorrelationshiptopatient":"1","address1":"123
         Pretend St","guarantorphone":null},{"occupationcode":null,"departmentid":"82","homephone":"7326189440","ethnicitycode":null,"industrycode":null,"contacthomephone":null,"guarantorssn":null,"guarantoraddresssameaspatient":"true","employerphone":null,"contactmobilephone":null,"nextkinphone":null,"portaltermsonfile":"false","status":"active","lastname":"Test","ssn":null,"privacyinformationverified":"false","primarydepartmentid":"82","race":[],"language6392code":null,"primaryproviderid":"","caresummarydeliverypreference":null,"firstname":"Erin","patientid":"4675","dob":"02\/16\/1991","guarantorrelationshiptopatient":"1","guarantorphone":null}],"totalcount":"1079"}'
     http_version: 
-  recorded_at: Mon, 10 Aug 2015 16:49:56 GMT
+  recorded_at: Mon, 10 Aug 2015 16:47:31 GMT
 recorded_with: VCR 2.9.3
