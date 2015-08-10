@@ -3,9 +3,8 @@ require 'uri'
 require 'httparty'
 require 'httmultiparty'
 require 'builder'
-require 'time'
+require 'time' 
 require 'dotenv'
-require "pry-byebug"
 
 Dotenv.load
 
