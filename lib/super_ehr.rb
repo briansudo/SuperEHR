@@ -334,16 +334,16 @@ module SuperEHR
     def get_changed_patients(start_date, limit=5000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       subscribe = make_request("GET", "patients/changed/subscription", {})
       if subscribe.has_key?("status") and subscribe["status"] == "ACTIVE"
-        response = make_athena_request("patients/changed",
+        response = make_request("GET", "patients/changed",
                                 { :ignorerestrictions => false,
                                   :leaveunprocessed => false,
                                   :showprocessedstartdatetime => "#{start_date} 00:00:00",
-                                  :showprocessedenddatetime => end_date, 
+                                  :showprocessedenddatetime => end_date,
                                   :limit => limit})
       else
         return []
       end
-      return response
+      return response["patients"]
     end
 
     # start_date needs to be in mm/dd/yyyy
@@ -389,22 +389,20 @@ module SuperEHR
         return response
     end
 
-
-    private 
+    private
 
       #Iterates through the pagintized json responses
-      def make_athena_request(endpoint, params={})
-        binding.pry
-        result = []
-        while endpoint
-          data = make_request("GET", endpoint, params)
-          if data["patients"]
-            result = result | data["patients"]
-          end
-            endpoint = data["next"]
-        end
-        return result
-      end
+      # def make_athena_request(endpoint, params={})
+      #   result = []
+      #   while endpoint
+      #     data = make_request("GET", endpoint, params)
+      #     if data["patients"]
+      #       result = result | data["patients"]
+      #     end
+      #       endpoint = data["next"]
+      #   end
+      #   return result
+      # end
 
   end
 
@@ -534,7 +532,7 @@ module SuperEHR
       url = "api/documents"
       headers = get_request_headers
       params = {:patient => patient_id}
-      
+
       patient_documents = chrono_request(url, params)
       for document in patient_documents
         if document["description"] == description
@@ -603,12 +601,8 @@ module SuperEHR
     end
   end
 
-  def self.allscripts(ehr_username, ehr_password,
-                      app_username, app_password, app_name,
-                      using_touchworks)
-    return AllScriptsAPI.new(ehr_username, ehr_password,
-                              app_username, app_password, app_name,
-                              using_touchworks)
+  def self.allscripts(ehr_username, ehr_password, app_username, app_password, app_name, using_touchworks)
+    return AllScriptsAPI.new(ehr_username, ehr_password,app_username, app_password, app_name, using_touchworks)
   end
 
   def self.athena(version, key, secret, practice_id)
