@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:07:26 GMT
+    body:
+      encoding: UTF-8
+      string: 29D32D97-E839-4B65-8409-1F1C117A78E3
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:08:06 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":33,"Token":"29D32D97-E839-4B65-8409-1F1C117A78E3","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '995'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:07:26 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"(802)
+        985-0932 (H)","age":"45y","middlename":"","mrn":"031226095332733","nextappointment":"No
+        next appointment has been scheduled","CellPhone":"","Email":"","LastName":"Test","WorkPhone":"","gender":"Male","ID":"33","AgeDec":"45.218","Race":"
+        ","ssn":"347201241  ","dateofbirth":"19-May-1970","AddressLine2":"","previousappointment":"Last
+        Appointment: 06-Aug-2015 11:15 am with Bones, Jeff, Vag Bleed","OnClinicalTrialFlag":"N","ZipCode":"05482     ","State":"VT","allmrn":"3|031226095332733^","othernumber2":"","PhysPhone":"","Firstname":"Cardiology","patientorg":"3","MaritalStatus":"Other","Ethnicity":"","Addressline1":"467
+        Grouse Point","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"No","PrimaryInsurance":"No
+        Primary Insurance","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"Shelburne","HomePhone":"(802)
+        985-0932 (H)"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:08:06 GMT
+recorded_with: VCR 2.9.3

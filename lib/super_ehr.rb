@@ -4,6 +4,10 @@ require 'httparty'
 require 'httmultiparty'
 require 'builder'
 require 'time'
+require 'dotenv'
+require "pry-byebug"
+
+Dotenv.load
 
 module SuperEHR
 
@@ -153,6 +157,7 @@ module SuperEHR
 
     ### API CALLS ###
 
+    #tested
     def get_patient(patient_id)
       params = {:Action => 'GetPatient', :PatientID => patient_id}
       response = make_request("POST", "json/MagicJson", params)[0]
@@ -190,7 +195,9 @@ module SuperEHR
       patients = []
       if response.key?("getscheduleinfo")
         if not response["getscheduleinfo"].empty?
-          for scheduled_patient in response["getscheduleinfo"]
+          for schedule_block in response["getscheduleinfo"]
+            patientid = schedule_block["patientID"]
+            scheduled_patient = get_patient(patientid)
             patients << scheduled_patient
           end
         end
@@ -254,7 +261,11 @@ module SuperEHR
     def get_provider_entry_code()
       params = {:Action => 'GetProvider', :Parameter2 => @ehr_username}
       out = make_request("POST", "json/MagicJson", params)
-      return out[0]["getproviderinfo"][0]["EntryCode"]
+      if @using_touchworks
+        return out[0]["getproviderinfo"][0]["EntryCode"]
+      else
+        return out[1]["getproviderinfo1"][0]["EntryCode"]
+      end
     end
 
     def get_encounter(patient_id)
@@ -271,7 +282,7 @@ module SuperEHR
     ### API SPECIFIC HOUSEKEEPING ###
 
     def initialize(version, key, secret, practice_id)
-      @uri = URI.parse('https://api.athenahealth.com/')
+      @uri = URI.parse('https://api.athenahealth.com')
       @version = version
       @key = key
       @secret = secret
@@ -288,7 +299,7 @@ module SuperEHR
 
     def refresh_token
       auth_paths = {
-        'vi' => 'oauth',
+        'v1' => 'oauth',
         'preview1' => 'oauthpreview',
         'openpreview1' => 'oauthopenpreview',
       }
@@ -305,6 +316,13 @@ module SuperEHR
 
     ### API CALLS ###
 
+
+    def get_patients
+      patients = get_changed_patients("01/01/1900", 5000)
+      return patients
+    end
+
+
     def get_patient(patient_id)
       response = make_request("GET", "patients/#{patient_id}", {})
       patient_info = {}
@@ -314,33 +332,32 @@ module SuperEHR
       return patient_info
     end
 
-    def get_changed_patients(ts='')
-      patient_ids = get_changed_patients_ids(ts)
-      patients = []
-      for id in patient_ids
-        patients << get_patient(id)
-      end
-      return patients
-    end
-
-    # start_date needs to be in mm/dd/yyyy
-    # returns a list of patient ids that have been changed since start_date
-    def get_changed_patients_ids(start_date, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+    def get_changed_patients(start_date, limit=5000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       subscribe = make_request("GET", "patients/changed/subscription", {})
       if subscribe.has_key?("status") and subscribe["status"] == "ACTIVE"
         response = make_request("GET", "patients/changed",
                                 { :ignorerestrictions => false,
                                   :leaveunprocessed => false,
                                   :showprocessedstartdatetime => "#{start_date} 00:00:00",
-                                  :showprocessedenddatetime => end_date })
-        patient_ids = []
-        if response.key?("patients")
-          patient_ids = response["patients"].map {|x| x["patientid"] }
-        end
-        return patient_ids
+                                  :showprocessedenddatetime => end_date,
+                                  :limit => limit})
       else
-        return nil
+        return {}
       end
+      return response["patients"]
+    end
+
+    # start_date needs to be in mm/dd/yyyy
+    # returns a list of patient ids that have been changed since start_date
+    def get_changed_patients_ids(start_date, limit=5000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
+      changed_patients = get_changed_patients(start_date, limit, end_date)
+      patient_ids = []
+      if changed_patients
+        changed_patients.each do |changed_patient|
+          patient_ids << changed_patient["patientid"]
+        end
+      end
+      return patient_ids
     end
 
     def get_scheduled_patients(date, department_id=1)
@@ -348,7 +365,8 @@ module SuperEHR
                               {:departmentid => department_id, :startdate => date, :enddate => date})
       patients = []
       if not response["appointments"].empty?
-        for scheduled_patient in response["appointments"]
+        for appointment in response["appointments"]
+          scheduled_patient = get_patient(appointment["patientid"].to_i)
           patients << scheduled_patient
         end
       end
@@ -371,6 +389,21 @@ module SuperEHR
         response = HTTMultiParty.post(url, :body => params, :headers => headers)
         return response
     end
+
+    private
+
+      #Iterates through the pagintized json responses
+      # def make_athena_request(endpoint, params={})
+      #   result = []
+      #   while endpoint
+      #     data = make_request("GET", endpoint, params)
+      #     if data["patients"]
+      #       result = result | data["patients"]
+      #     end
+      #       endpoint = data["next"]
+      #   end
+      #   return result
+      # end
 
   end
 
@@ -423,7 +456,7 @@ module SuperEHR
     # Not efficient
     # Get the patient using patient id from our database
     def get_patient(patient_id)
-      patients = get_patients()
+      patients = get_patients
       for patient in patients
         if patient["id"] == patient_id
           return patient
@@ -468,23 +501,60 @@ module SuperEHR
       return patients
     end
 
-    def upload_document(patient_id, filepath, description)
-      url = get_request_url("api/documents")
+    #uploads a pdf of to dr chrono
+    def upload_document(patient_id, pdf_location, description, recording, request)
       headers = get_request_headers
       date = Date.today
-
-      params = {
-        :doctor => /\/api\/doctors\/.*/.match(get_patient(patient_id)["doctor"]),
-        :patient => "/api/patients/#{patient_id}",
-        :description => description,
-        :date => date,
-        :document => File.new(filepath)
-      }
-      response = HTTMultiParty.post(url, :body => params, :headers => headers)
-      return response
+      patient = self.get_patient(patient_id)
+      if (patient == nil)
+        return -1
+      else
+        file = File.new(pdf_location)
+        params = {
+            :doctor => /\/api\/doctors\/.*/.match(patient["doctor"]),
+            :patient => "/api/patients/#{patient_id}",
+            :description => description,
+            :date => date,
+            :document => file
+        }
+        if request == "post"
+          pdf_upload_request('post', params, headers, recording)
+        else
+          pdf_upload_request('put', params, headers, recording)
+        end
+      end
+      return 1
     end
 
     private
+
+    #Checks if there is a document with description for a given patient, if there is
+    def check_document(patient_id, description)
+      url = "api/documents"
+      headers = get_request_headers
+      params = {:patient => patient_id}
+
+      patient_documents = chrono_request(url, params)
+      for document in patient_documents
+        if document["description"] == description
+          return document
+        end
+      end
+      return nil
+    end
+
+    #handles the request to dr crhono
+    def pdf_upload_request(request, params, headers, recording)
+      url = get_request_url("api/documents")
+      if request == 'post'
+        response = HTTMultiParty.post(url, :query => params, :headers => headers)
+        recording.update_attributes(:chrono_id => response["id"])
+      else
+        put_url = url + "/#{recording.chrono_id}"
+        response = HTTMultiParty.put(put_url, :query => params, :headers => headers)
+        recording.update_attributes(:chrono_id => response["id"])
+      end
+    end
 
     def chrono_request(endpoint, params={})
       result = []
@@ -494,6 +564,9 @@ module SuperEHR
           result = result | data["results"]
         end
         endpoint = data["next"]
+        if endpoint
+          endpoint = endpoint[20..-1]
+        end
       end
       return result
     end
@@ -529,12 +602,8 @@ module SuperEHR
     end
   end
 
-  def self.allscripts(ehr_username, ehr_password,
-                      app_username, app_password, app_name,
-                      using_touchworks)
-    return AllScriptsAPI.new(ehr_username, ehr_password,
-                              app_username, app_password, app_name,
-                              using_touchworks)
+  def self.allscripts(ehr_username, ehr_password, app_username, app_password, app_name, using_touchworks)
+    return AllScriptsAPI.new(ehr_username, ehr_password,app_username, app_password, app_name, using_touchworks)
   end
 
   def self.athena(version, key, secret, practice_id)

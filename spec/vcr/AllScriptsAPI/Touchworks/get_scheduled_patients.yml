@@ -1,0 +1,818 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:18 GMT
+    body:
+      encoding: UTF-8
+      string: 631E7530-6344-46BF-A5DE-B0C4450E2FFC
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:11:59 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetSchedule","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"","Token":"631E7530-6344-46BF-A5DE-B0C4450E2FFC","Parameter1":"2015-08-07","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '4330'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:18 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getscheduleinfo":[{"Status":"Arr","Location":"New World Health -
+        Main Location","SchedComment":"","patientmiddlename":"","Patient":"Smith,
+        Suzanne","Duration":"15","SchedText":"","organizationMRN":"040102151404060","ApptTime":"08/07/2015
+        8:15:00 AM","type":"ACU       ","TimeIn":"08:15","base64image":"","TimeStart":"08:15","TimeOut":"08:30","Comment":"UTI","PatientLastName":"Smith","PatientFirstName":"Suzanne","Encounterid":"43271","patientID":"48"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Peters,
+        Gerald","Duration":"15","SchedText":"","organizationMRN":"040102153656090","ApptTime":"08/07/2015
+        8:30:00 AM","type":"ACU       ","TimeIn":"08:30","base64image":"","TimeStart":"08:30","TimeOut":"08:45","Comment":"SOB","PatientLastName":"Peters","PatientFirstName":"Gerald","Encounterid":"43272","patientID":"49"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Paulson,
+        Penny","Duration":"15","SchedText":"","organizationMRN":"040102153753153","ApptTime":"08/07/2015
+        8:45:00 AM","type":"ACU       ","TimeIn":"08:45","base64image":"","TimeStart":"08:45","TimeOut":"09:00","Comment":"Chest
+        Pain","PatientLastName":"Paulson","PatientFirstName":"Penny","Encounterid":"43273","patientID":"50"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Myers,
+        Theresa","Duration":"30","SchedText":"","organizationMRN":"040103084123873","ApptTime":"08/07/2015
+        9:00:00 AM","type":"ACU       ","TimeIn":"09:00","base64image":"","TimeStart":"09:00","TimeOut":"09:30","Comment":"HME","PatientLastName":"Myers","PatientFirstName":"Theresa","Encounterid":"43274","patientID":"51"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Fransen,
+        Susan","Duration":"30","SchedText":"","organizationMRN":"031230103233280","ApptTime":"08/07/2015
+        2:15:00 PM","type":"ACU       ","TimeIn":"","base64image":"","TimeStart":"","TimeOut":"","Comment":"Ankle
+        Inj","PatientLastName":"Fransen","PatientFirstName":"Susan","Encounterid":"43265","patientID":"41"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Crozier,
+        Charles","Duration":"15","SchedText":"","organizationMRN":"031230150224060","ApptTime":"08/07/2015
+        2:45:00 PM","type":"ACU       ","TimeIn":"","base64image":"","TimeStart":"","TimeOut":"","Comment":"Pelvic
+        Fx","PatientLastName":"Crozier","PatientFirstName":"Charles","Encounterid":"43266","patientID":"42"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Collier,
+        Alexander","Duration":"15","SchedText":"","organizationMRN":"040102135954827","ApptTime":"08/07/2015
+        3:00:00 PM","type":"ACU       ","TimeIn":"","base64image":"","TimeStart":"","TimeOut":"","Comment":"Knee
+        Inj","PatientLastName":"Collier","PatientFirstName":"Alexander","Encounterid":"43267","patientID":"44"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Morris,
+        Julie","Duration":"30","SchedText":"","organizationMRN":"040102140111293","ApptTime":"08/07/2015
+        3:15:00 PM","type":"ACU       ","TimeIn":"","base64image":"","TimeStart":"","TimeOut":"","Comment":"Headache","PatientLastName":"Morris","PatientFirstName":"Julie","Encounterid":"43268","patientID":"45"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"Grandstaff,
+        Terry","Duration":"15","SchedText":"","organizationMRN":"040102140211763","ApptTime":"08/07/2015
+        3:45:00 PM","type":"ACU       ","TimeIn":"","base64image":"","TimeStart":"","TimeOut":"","Comment":"Back
+        Pain","PatientLastName":"Grandstaff","PatientFirstName":"Terry","Encounterid":"43269","patientID":"46"},{"Status":"Arr","Location":"New
+        World Health - Main Location","SchedComment":"","patientmiddlename":"","Patient":"True,
+        Thomas","Duration":"15","SchedText":"","organizationMRN":"040102151304530","ApptTime":"08/07/2015
+        4:00:00 PM","type":"ACU       ","TimeIn":"","base64image":"","TimeStart":"","TimeOut":"","Comment":"HME","PatientLastName":"True","PatientFirstName":"Thomas","Encounterid":"43270","patientID":"47"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:11:59 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:18 GMT
+    body:
+      encoding: UTF-8
+      string: BDE990E9-24EB-4429-9DE7-696438DBA715
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:11:59 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"48","Token":"BDE990E9-24EB-4429-9DE7-696438DBA715","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '936'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:18 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":"ENGLISH","IsInactiveFLAG":"N","PhysLastName":"","PhoneNumber":"","age":"11y7m","middlename":"","mrn":"040102151404060","nextappointment":"No
+        next appointment has been scheduled","CellPhone":"","Email":"","LastName":"Smith","WorkPhone":"","gender":"Female","ID":"48","AgeDec":"11.581","Race":"
+        ","ssn":"           ","dateofbirth":"07-Jan-2004","AddressLine2":"","previousappointment":"Last
+        Appointment: 07-Aug-2015 8:30 am with Bones, Jeff, SOB","OnClinicalTrialFlag":"N","ZipCode":"05402     ","State":"VT","allmrn":"3|040102151404060^","othernumber2":"","PhysPhone":"","Firstname":"Suzanne","patientorg":"3","MaritalStatus":"
+        ","Ethnicity":"","Addressline1":"1122 Bondell Street","PatientLocation":"","PhysFirstName":"","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Blue
+        Cross One","base64image":"","PatientXID":"","PhysUserName":"","City":"Burlington","HomePhone":""}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:11:59 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:18 GMT
+    body:
+      encoding: UTF-8
+      string: 4E54334B-2B8C-4C6A-BF8A-02E4EB7E30F0
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:11:59 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"49","Token":"4E54334B-2B8C-4C6A-BF8A-02E4EB7E30F0","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '982'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:19 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":"ENGLISH","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"(802)
+        985-0932 (H)","age":"26y","middlename":"","mrn":"040102153656090","nextappointment":"No
+        next appointment has been scheduled","CellPhone":"","Email":"","LastName":"Peters","WorkPhone":"","gender":"Male","ID":"49","AgeDec":"26.272","Race":"
+        ","ssn":"231446373  ","dateofbirth":"29-Apr-1989","AddressLine2":"","previousappointment":"Last
+        Appointment: 07-Aug-2015 8:45 am with Bones, Jeff, Chest Pain","OnClinicalTrialFlag":"N","ZipCode":"05402     ","State":"VT","allmrn":"3|040102153656090^","othernumber2":"","PhysPhone":"","Firstname":"Gerald","patientorg":"3","MaritalStatus":"Other","Ethnicity":"","Addressline1":"96
+        Race Street","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Blue","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"Burlington","HomePhone":"(802)
+        985-0932 (H)"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:00 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:19 GMT
+    body:
+      encoding: UTF-8
+      string: 685FEE7A-B351-44B9-B9B3-733444C55C4A
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:00 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"50","Token":"685FEE7A-B351-44B9-B9B3-733444C55C4A","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '971'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:19 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"(802)
+        985-0932 (H)","age":"22y","middlename":"","mrn":"040102153753153","nextappointment":"No
+        next appointment has been scheduled","CellPhone":"","Email":"","LastName":"Paulson","WorkPhone":"","gender":"Female","ID":"50","AgeDec":"22.196","Race":"
+        ","ssn":"347201237  ","dateofbirth":"27-May-1993","AddressLine2":"","previousappointment":"Last
+        Appointment: 07-Aug-2015 9:00 am with Bones, Jeff, HME","OnClinicalTrialFlag":"N","ZipCode":"05402     ","State":"VT","allmrn":"3|040102153753153^","othernumber2":"","PhysPhone":"","Firstname":"Penny","patientorg":"3","MaritalStatus":"Other","Ethnicity":"","Addressline1":"35
+        Clinton Way","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Cigna","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"Charlotte","HomePhone":"(802)
+        985-0932 (H)"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:00 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:19 GMT
+    body:
+      encoding: UTF-8
+      string: 88E2C46E-12AB-4BAF-97DD-6249C96F6C7C
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:00 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"51","Token":"88E2C46E-12AB-4BAF-97DD-6249C96F6C7C","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '984'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:19 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"(802)
+        789-9231 (H)","age":"59y","middlename":"","mrn":"040103084123873","nextappointment":"No
+        next appointment has been scheduled","CellPhone":"","Email":"","LastName":"Myers","WorkPhone":"","gender":"Female","ID":"51","AgeDec":"59.086","Race":"
+        ","ssn":"243877341  ","dateofbirth":"06-Jul-1956","AddressLine2":"","previousappointment":"Last
+        Appointment: 07-Aug-2015 9:30 am with Bones, Jeff, Palpitations","OnClinicalTrialFlag":"N","ZipCode":"05481     ","State":"VT","allmrn":"3|040103084123873^","othernumber2":"","PhysPhone":"","Firstname":"Theresa","patientorg":"3","MaritalStatus":"Other","Ethnicity":"","Addressline1":"4581
+        Mountain View","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Aetna","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"Charlotte","HomePhone":"(802)
+        789-9231 (H)"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:00 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:19 GMT
+    body:
+      encoding: UTF-8
+      string: 57EEA3F4-C049-47E9-800B-71EFA431F5D5
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:00 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"41","Token":"57EEA3F4-C049-47E9-800B-71EFA431F5D5","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '1007'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:19 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"(802)
+        985-9830 (H)","age":"59y","middlename":"","mrn":"031230103233280","nextappointment":"Next
+        Appointment: 07-Aug-2015 2:15 pm with Medici, James, Ankle Inj","CellPhone":"","Email":"","LastName":"Fransen","WorkPhone":"","gender":"Female","ID":"41","AgeDec":"59.795","Race":"
+        ","ssn":"347201234  ","dateofbirth":"21-Oct-1955","AddressLine2":"","previousappointment":"Last
+        Appointment: 02-Aug-2015 2:15 pm with Bones, Jeff, Ankle Inj","OnClinicalTrialFlag":"N","ZipCode":"05480     ","State":"VT","allmrn":"3|031230103233280^","othernumber2":"","PhysPhone":"","Firstname":"Susan","patientorg":"3","MaritalStatus":"Other","Ethnicity":"","Addressline1":"333
+        Bishop Road","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Aetna","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"Shelburne","HomePhone":"(802)
+        985-9830 (H)"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:00 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:20 GMT
+    body:
+      encoding: UTF-8
+      string: 22E28DF7-BD86-4F70-B0F4-98ECCA99B477
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:01 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"42","Token":"22E28DF7-BD86-4F70-B0F4-98ECCA99B477","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '1020'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:20 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"(802)
+        658-9021 (H)","age":"63y","middlename":"","mrn":"031230150224060","nextappointment":"Next
+        Appointment: 07-Aug-2015 2:45 pm with Medici, James, Pelvic Fx","CellPhone":"","Email":"","LastName":"Crozier","WorkPhone":"","gender":"Male","ID":"42","AgeDec":"63.168","Race":"
+        ","ssn":"450239003  ","dateofbirth":"06-Jun-1952","AddressLine2":"","previousappointment":"Last
+        Appointment: 02-Aug-2015 2:45 pm with Bones, Jeff, Pelvic Fx","OnClinicalTrialFlag":"N","ZipCode":"05403     ","State":"VT","allmrn":"3|031230150224060^","othernumber2":"","PhysPhone":"","Firstname":"Charles","patientorg":"3","MaritalStatus":"Other","Ethnicity":"","Addressline1":"3245
+        Meadowlane Drive","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"Yes","PrimaryInsurance":"Blue","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"South
+        Burlington","HomePhone":"(802) 658-9021 (H)"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:01 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:20 GMT
+    body:
+      encoding: UTF-8
+      string: CF37B3C5-D54D-48CB-BBC4-A9C816D0C56F
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:01 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"44","Token":"CF37B3C5-D54D-48CB-BBC4-A9C816D0C56F","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '978'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:20 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"","age":"44y","middlename":"","mrn":"040102135954827","nextappointment":"Next
+        Appointment: 07-Aug-2015 3:00 pm with Medici, James, Knee Inj","CellPhone":"","Email":"","LastName":"Collier","WorkPhone":"","gender":"Male","ID":"44","AgeDec":"44.676","Race":"
+        ","ssn":"231 43 1235","dateofbirth":"03-Dec-1970","AddressLine2":"","previousappointment":"Last
+        Appointment: 02-Aug-2015 3:00 pm with Bones, Jeff, Knee Inj","OnClinicalTrialFlag":"N","ZipCode":"05402     ","State":"VT","allmrn":"3|040102135954827^","othernumber2":"","PhysPhone":"","Firstname":"Alexander","patientorg":"3","MaritalStatus":"Single","Ethnicity":"","Addressline1":"123
+        Riverside Street","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Aetna","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"Burlington","HomePhone":""}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:01 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:20 GMT
+    body:
+      encoding: UTF-8
+      string: AC097103-EA37-4557-8BAC-C864B82C5C38
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:01 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"45","Token":"AC097103-EA37-4557-8BAC-C864B82C5C38","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '947'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:20 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"","PhoneNumber":"","age":"44y","middlename":"","mrn":"040102140111293","nextappointment":"Next
+        Appointment: 07-Aug-2015 3:15 pm with Medici, James, Headache","CellPhone":"","Email":"","LastName":"Morris","WorkPhone":"","gender":"Female","ID":"45","AgeDec":"44.813","Race":"
+        ","ssn":"298 12 6943","dateofbirth":"14-Oct-1970","AddressLine2":"","previousappointment":"Last
+        Appointment: 02-Aug-2015 3:15 pm with Bones, Jeff, Headache","OnClinicalTrialFlag":"N","ZipCode":"05402     ","State":"VT","allmrn":"3|040102140111293^","othernumber2":"","PhysPhone":"","Firstname":"Julie","patientorg":"3","MaritalStatus":"Single","Ethnicity":"","Addressline1":"4
+        Rose Lane","PatientLocation":"","PhysFirstName":"","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Cigna","base64image":"","PatientXID":"","PhysUserName":"","City":"Burlngton","HomePhone":""}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:01 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:20 GMT
+    body:
+      encoding: UTF-8
+      string: 860C1B97-822B-4031-A90D-3BE400F13E1B
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:02 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"46","Token":"860C1B97-822B-4031-A90D-3BE400F13E1B","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '1022'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:21 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"Medici","PhoneNumber":"(802)
+        985-0932 (H)","age":"58y","middlename":"","mrn":"040102140211763","nextappointment":"Next
+        Appointment: 07-Aug-2015 3:45 pm with Medici, James, Back Pain","CellPhone":"","Email":"","LastName":"Grandstaff","WorkPhone":"","gender":"Male","ID":"46","AgeDec":"58.839","Race":"
+        ","ssn":"271814922  ","dateofbirth":"04-Oct-1956","AddressLine2":"","previousappointment":"Last
+        Appointment: 02-Aug-2015 3:45 pm with Bones, Jeff, Back Pain","OnClinicalTrialFlag":"N","ZipCode":"05402     ","State":"VT","allmrn":"3|040102140211763^","othernumber2":"","PhysPhone":"","Firstname":"Terry","patientorg":"3","MaritalStatus":"Other","Ethnicity":"","Addressline1":"23
+        Liverston Way","PatientLocation":"","PhysFirstName":"James","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Family
+        Health Plan","base64image":"","PatientXID":"","PhysUserName":"jmedici","City":"Charlotte","HomePhone":"(802)
+        985-0932 (H)"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:02 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:21 GMT
+    body:
+      encoding: UTF-8
+      string: B8C7BB49-A3F6-49E2-B110-291E030B6EA4
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:02 GMT
+- request:
+    method: post
+    uri: http://twlatestga.unitysandbox.com/unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetPatient","AppUserID":"jmedici","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"47","Token":"B8C7BB49-A3F6-49E2-B110-291E030B6EA4","Parameter1":"","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '940'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:11:21 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getpatientinfo":[{"genericattribute":"","Language":" ","IsInactiveFLAG":"N","PhysLastName":"","PhoneNumber":"","age":"11y4m","middlename":"","mrn":"040102151304530","nextappointment":"Next
+        Appointment: 07-Aug-2015 4:00 pm with Medici, James, HME","CellPhone":"","Email":"","LastName":"True","WorkPhone":"","gender":"Male","ID":"47","AgeDec":"11.387","Race":"
+        ","ssn":"           ","dateofbirth":"18-Mar-2004","AddressLine2":"","previousappointment":"Last
+        Appointment: 07-Aug-2015 8:15 am with Bones, Jeff, UTI","OnClinicalTrialFlag":"N","ZipCode":"05402     ","State":"VT","allmrn":"3|040102151304530^","othernumber2":"","PhysPhone":"","Firstname":"Thomas","patientorg":"3","MaritalStatus":"Single","Ethnicity":"","Addressline1":"45
+        Rondell Road","PatientLocation":"","PhysFirstName":"","othernumber":"","fmhpatient":"No","PrimaryInsurance":"Blue","base64image":"","PatientXID":"","PhysUserName":"","City":"Burlington","HomePhone":""}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:12:02 GMT
+recorded_with: VCR 2.9.3
