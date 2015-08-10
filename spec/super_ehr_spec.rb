@@ -266,14 +266,21 @@ RSpec.describe SuperEHR::AthenaAPI do
             end
         end
 
+        describe "#get_patients" do
+            it "gets all patients for a user" do
+                VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
+                    response = client.get_patients
+                    expect(response.length).to eq(1074)
+                end
+            end
+        end
+
         describe "#get_changed_patients_ids" do
             it "gets the id's of changed patients since agiven date" do
                 #when running rspec, you must delete this cassette because it calls a new end_time every call
                 VCR.use_cassette "AthenaHealthAPI/get_changed_patients_ids" do
-                    response = client.get_changed_patients_ids("01/01/2015")
-                    expect(response[0]).to eq("3646")
-                    expect(response[1]).to eq("3647")
-                    expect(response.length).to eq(1074)
+                    response = client.get_changed_patients_ids("08/01/2015")
+                    expect(response.length).to eq(995)
                 end
             end
         end
@@ -282,9 +289,9 @@ RSpec.describe SuperEHR::AthenaAPI do
             it "gets all changed patients since a given date" do
                 #when running rspec, you must delete this cassette because it calls a new end_time every call
                 VCR.use_cassette "AthenaHealthAPI/get_changed_patients" do
-                    response = client.get_changed_patients("01/01/2015")
-                    expect(response[0]["patientid"]).to eq("3646")
-                    expect(response.length).to eq(1074)
+                    response = client.get_changed_patients("08/01/2015")
+                    expect(response[0]["patientid"]).to eq("3716")
+                    expect(response.length).to eq(995)
                 end
             end
         end
@@ -310,14 +317,6 @@ RSpec.describe SuperEHR::AthenaAPI do
         end
 
         #when running rspec, you must delete this cassette because it calls a new end_time every call
-        describe "#get_patients" do
-            it "gets all patients for a user" do
-                VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
-                    response = client.get_patients
-                    expect(response.length).to eq(1074)
-                end
-            end
-        end
     end
 end
 
