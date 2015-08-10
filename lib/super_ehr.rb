@@ -334,7 +334,7 @@ module SuperEHR
     def get_changed_patients(start_date, limit=5000, end_date=Time.new.strftime("%m/%d/%Y %H:%M:%S"))
       subscribe = make_request("GET", "patients/changed/subscription", {})
       if subscribe.has_key?("status") and subscribe["status"] == "ACTIVE"
-        response = make_request("GET", "patients/changed",
+        response = make_athena_request("patients/changed",
                                 { :ignorerestrictions => false,
                                   :leaveunprocessed => false,
                                   :showprocessedstartdatetime => "#{start_date} 00:00:00",
@@ -343,7 +343,7 @@ module SuperEHR
       else
         return []
       end
-      return response["patients"]
+      return response
     end
 
     # start_date needs to be in mm/dd/yyyy
@@ -391,18 +391,20 @@ module SuperEHR
 
     private
 
-      #Iterates through the pagintized json responses
-      # def make_athena_request(endpoint, params={})
-      #   result = []
-      #   while endpoint
-      #     data = make_request("GET", endpoint, params)
-      #     if data["patients"]
-      #       result = result | data["patients"]
-      #     end
-      #       endpoint = data["next"]
-      #   end
-      #   return result
-      # end
+      # Iterates through the pagintized json responses
+      def make_athena_request(endpoint, params={})
+        result = []
+        while endpoint
+          data = make_request("GET", endpoint, params)
+          if data["patients"]
+            data["patients"].each do |patient| 
+              result << patient
+            end
+          end
+          endpoint = data["next"]
+        end
+        return result
+      end
 
   end
 

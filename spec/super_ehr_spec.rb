@@ -256,7 +256,7 @@ RSpec.describe SuperEHR::AthenaAPI do
         client = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 195900)
 
         describe "#get_patient" do
-            it "gets all patients from users account" do
+            it "gets a patient from specified id" do
                 VCR.use_cassette "AthenaHealthAPI/get_patient_by_id" do
                     response = client.get_patient(1)
                     expect(response["lastname"]).to eq("Huff")
@@ -306,18 +306,17 @@ RSpec.describe SuperEHR::AthenaAPI do
                     description = "example pdf"
                     response = client.upload_document(patient_id, file_path, description)
                 end
-
-                #when running rspec, you must delete this cassette because it calls a new end_time every call
-                VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
-                    response = client.get_patients
-                    expect(response.length).to eq(1079)
-                end
             end
         end
 
         #when running rspec, you must delete this cassette because it calls a new end_time every call
-        VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
-            response = client.get_patients
+        describe "#get_patients" do
+            it "gets all patients for a user" do
+                VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
+                    response = client.get_patients
+                    expect(response.length).to eq(1074)
+                end
+            end
         end
     end
 end
