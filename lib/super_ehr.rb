@@ -307,8 +307,11 @@ module SuperEHR
 
       url = "#{@uri}/#{auth_paths[@version]}/token"
       params = {:grant_type => "client_credentials"}
-      response = HTTParty.post(url, :body => params, :basic_auth => auth)
-
+      begin 
+        response = HTTParty.post(url, :body => params, :basic_auth => auth)
+      rescue 
+        return nil 
+      end
       return response["access_token"]
     end
 

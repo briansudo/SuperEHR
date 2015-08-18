@@ -294,6 +294,13 @@ RSpec.describe SuperEHR::AthenaAPI do
                     expect(response.length).to eq(995)
                 end
             end
+
+            it "gets changed patients since 08/04/2015 " do
+                VCR.use_cassette "AthenaHealthAPI/get_changed_patients_2" do
+                    response = client.get_changed_patients("08/04/2015")
+                end
+            end
+
         end
 
         describe "#get_scheduled_patients" do
