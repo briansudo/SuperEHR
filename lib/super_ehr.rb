@@ -361,10 +361,14 @@ module SuperEHR
 
     ##Used to check credential of a client
     def valid_credentials?
-      response = make_request("GET", "ping", {})
-      if response["pong"] == "true"
-        return true
-      else 
+      begin
+        response = make_request("GET", "ping", {})
+        if response["pong"] == "true"
+          return true
+        else 
+          return false
+        end
+      rescue
         return false
       end
     end
