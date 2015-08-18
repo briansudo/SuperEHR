@@ -250,14 +250,32 @@ end
 
 
 RSpec.describe SuperEHR::AthenaAPI do
+        describe "#valid_credentials?" do
+            it "validated the user's athena credentials, should be false" do
+                VCR.use_cassette "AthenaHealthAPI/invalid_initialization" do 
+                    client = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 1234543213)
+                    expect(client.valid_credentials?).to eq(false)
+                end
+            end
+        end
 
-    VCR.use_cassette "AthenaHealthAPI/initializeAthena" do
+    describe "#valid_credentials?" do
+            it "validated the user's athena credentials, should be true" do 
+                VCR.use_cassette "AthenaHealthAPI/initializeAthena" do 
+                    client = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 195900)
+                    expect(client.valid_credentials?).to eq(true)
+                end
+            end
+    end
+
+    VCR.use_cassette "AthenaHealthAPI/initializeAthena2" do
 
         client = SuperEHR.athena("preview1", ENV["ATHENA_HEALTH_KEY"], ENV["ATHENA_HEALTH_SECRET"], 195900)
 
+
         describe "#get_patient" do
             it "gets a patient from specified id" do
-                VCR.use_cassette "AthenaHealthAPI/get_patient_by_id" do
+                VCR.use_cassette "AthenaHealthAPI/get_patient_by_id", :record => :all do
                     response = client.get_patient(1)
                     expect(response["lastname"]).to eq("Huff")
                     expect(response["city"]).to eq("ASHBURN")
@@ -268,7 +286,7 @@ RSpec.describe SuperEHR::AthenaAPI do
 
         describe "#get_patients" do
             it "gets all patients for a user" do
-                VCR.use_cassette "AthenaHealthAPI/get_all_patients" do
+                VCR.use_cassette "AthenaHealthAPI/get_all_patients", :record => :all do
                     response = client.get_patients
                     expect(response.length).to eq(1074)
                 end
@@ -278,7 +296,7 @@ RSpec.describe SuperEHR::AthenaAPI do
         describe "#get_changed_patients_ids" do
             it "gets the id's of changed patients since agiven date" do
                 #when running rspec, you must delete this cassette because it calls a new end_time every call
-                VCR.use_cassette "AthenaHealthAPI/get_changed_patients_ids" do
+                VCR.use_cassette "AthenaHealthAPI/get_changed_patients_ids", :record => :all do
                     response = client.get_changed_patients_ids("08/01/2015")
                     expect(response.length).to eq(995)
                 end
@@ -288,7 +306,7 @@ RSpec.describe SuperEHR::AthenaAPI do
         describe "#get_changed_patients" do
             it "gets all changed patients since a given date" do
                 #when running rspec, you must delete this cassette because it calls a new end_time every call
-                VCR.use_cassette "AthenaHealthAPI/get_changed_patients" do
+                VCR.use_cassette "AthenaHealthAPI/get_changed_patients", :record => :all do
                     response = client.get_changed_patients("08/01/2015")
                     expect(response[0]["patientid"]).to eq("3716")
                     expect(response.length).to eq(995)
@@ -296,7 +314,7 @@ RSpec.describe SuperEHR::AthenaAPI do
             end
 
             it "gets changed patients since 08/04/2015 " do
-                VCR.use_cassette "AthenaHealthAPI/get_changed_patients_2" do
+                VCR.use_cassette "AthenaHealthAPI/get_changed_patients_2", :record => :all do
                     response = client.get_changed_patients("08/04/2015")
                 end
             end

@@ -304,12 +304,11 @@ module SuperEHR
       }
 
       auth = {:username => @key, :password => @secret}
-      puts "foooooooo"
 
       url = "#{@uri}/#{auth_paths[@version]}/token"
       params = {:grant_type => "client_credentials"}
       response = HTTParty.post(url, :body => params, :basic_auth => auth)
-      puts response.inspect
+      
       return response["access_token"]
     end
 
@@ -357,6 +356,17 @@ module SuperEHR
         end
       end
       return patient_ids
+    end
+
+
+    ##Used to check credential of a client
+    def valid_credentials?
+      response = make_request("GET", "ping", {})
+      if response["pong"] == "true"
+        return true
+      else 
+        return false
+      end
     end
 
     def get_scheduled_patients(date, department_id=1)

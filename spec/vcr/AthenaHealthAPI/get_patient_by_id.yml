@@ -17,22 +17,22 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Mon, 10 Aug 2015 16:57:45 GMT
+      - Tue, 18 Aug 2015 22:58:50 GMT
       Pragma:
       - no-cache
       Server:
       - Mashery Proxy
       X-Mashery-Responder:
-      - prod-j-worker-us-east-1b-59.mashery.com
+      - prod-j-worker-us-east-1e-85.mashery.com
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"access_token":"bw2ju43qbby2ruernbvpevt3","token_type":"bearer","expires_in":3600,"refresh_token":"ydezkeybnrkn5xh85rgm5vqh"}'
+      string: '{"access_token":"t4xvt6xr9fwfe3s4jk3juymd","token_type":"bearer","expires_in":3600,"refresh_token":"tx28m9gyadx84xmwu253fgas"}'
     http_version: 
-  recorded_at: Mon, 10 Aug 2015 16:57:46 GMT
+  recorded_at: Tue, 18 Aug 2015 22:58:52 GMT
 - request:
     method: get
     uri: https://api.athenahealth.com/preview1/195900/patients/1
@@ -41,18 +41,18 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer bw2ju43qbby2ruernbvpevt3
+      - Bearer t4xvt6xr9fwfe3s4jk3juymd
   response:
     status:
       code: 200
       message: OK
     headers:
       Cache-Control:
-      - no-cache
+      - no-cache, no-store
       Content-Type:
       - application/json
       Date:
-      - Mon, 10 Aug 2015 16:57:47 GMT
+      - Tue, 18 Aug 2015 22:58:51 GMT
       Expires:
       - Mon, 06 Jan 1975 16:00:00 GMT
       Nncoection:
@@ -64,9 +64,9 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Mashery-Message-Id:
-      - 36e73db3-c8c1-4e5c-b089-ecf265f353db
+      - 28153619-1ca1-40b4-9a5c-c721dec75e59
       X-Mashery-Responder:
-      - prod-j-worker-us-east-1e-75.mashery.com
+      - prod-j-worker-us-east-1e-79.mashery.com
       Content-Length:
       - '2619'
       Connection:
@@ -74,12 +74,12 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '[{"racename":"Patient Declined","email":"user5782@athenahealth.com","occupationcode":null,"departmentid":"1","homephone":"5555989233","guarantorstate":"MA","portalaccessgiven":"true","driverslicense":"true","contactpreference_appointment_email":"false","homebound":"false","contactpreference_appointment_sms":"true","contactpreference_billing_phone":"false","ethnicitycode":"declined","contactpreference_announcement_phone":"false","contactrelationship":"SPOUSE","employerid":"1","industrycode":null,"contacthomephone":"7038612187","mobilecarrierid":"50","guarantorssn":"*****7769","contactpreference_lab_sms":"true","guarantordob":"06\/02\/1970","zip":"01582","guarantoraddresssameaspatient":"false","employerphone":"8885550508","contactmobilephone":"7038612187","nextkinphone":null,"portaltermsonfile":"true","status":"active","lastname":"Huff","guarantorfirstname":"Collinparent","city":"ASHBURN","ssn":"*****7769","lastappointment":"08\/06\/2015
-        10:30","employercity":"MARBLEHEAD","guarantoremail":"0.8543395278509447@leohealth.com","guarantorcity":"WESTBOROUGH","guarantorzip":"01582","sex":"M","privacyinformationverified":"true","primarydepartmentid":"148","contactpreference_lab_email":"true","balances":[{"balance":0,"departmentlist":"62,142","providergroupid":"2","cleanbalance":"true"},{"balance":"-135.04","departmentlist":"1,21,102,145,148,150","providergroupid":"1","cleanbalance":"true"},{"balance":0,"departmentlist":"82","providergroupid":"22","cleanbalance":"true"}],"contactpreference_announcement_sms":"true","race":["declined"],"employerstate":"MA","firstappointment":"08\/13\/2010
+        10:30","employercity":"MARBLEHEAD","guarantoremail":"0.8543395278509447@leohealth.com","guarantorcity":"WESTBOROUGH","guarantorzip":"01582","sex":"M","privacyinformationverified":"true","primarydepartmentid":"148","contactpreference_lab_email":"true","balances":[{"balance":0,"departmentlist":"62,142","providergroupid":"2","cleanbalance":"true"},{"balance":"-155.04","departmentlist":"1,21,102,145,148,150","providergroupid":"1","cleanbalance":"true"},{"balance":0,"departmentlist":"82","providergroupid":"22","cleanbalance":"true"}],"contactpreference_announcement_sms":"true","race":["declined"],"employerstate":"MA","firstappointment":"08\/13\/2010
         10:30","language6392code":"eng","primaryproviderid":"21","patientphoto":"false","consenttocall":"true","contactpreference_billing_email":"false","employerzip":"01945","mobilephone":"5555627400","contactpreference_announcement_email":"false","hasmobile":"true","caresummarydeliverypreference":"PORTAL","guarantorlastname":"Huffparent","firstname":"Collin","guarantorcountrycode":"USA","state":"MA","contactpreference_appointment_phone":"false","patientid":"1","dob":"06\/15\/1974","guarantorrelationshiptopatient":"1","address1":"123
         Main St","guarantoremployerid":"1","contactpreference_billing_sms":"true","guarantorphone":"5555989233","employername":"JEANNETTA
         BRUNELLE","driverslicenseurl":"\/preview1\/195900\/patients\/1\/driverslicense","employeraddress":"8762
         STONERIDGE CT","maritalstatus":"M","countrycode":"USA","guarantoraddress1":"8762
         Stoneridge Ct","maritalstatusname":"MARRIED","countrycode3166":"US","onlinestatementonly":"true","contactpreference_lab_phone":"false","guarantorcountrycode3166":"US"}]'
     http_version: 
-  recorded_at: Mon, 10 Aug 2015 16:57:46 GMT
+  recorded_at: Tue, 18 Aug 2015 22:58:52 GMT
 recorded_with: VCR 2.9.3
