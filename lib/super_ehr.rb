@@ -560,13 +560,18 @@ module SuperEHR
 
     #handles the request to dr crhono
     def pdf_upload_request(request, params, headers, recording)
+      Rails.logger.info "at pdf upload request"
       url = get_request_url("api/documents")
       if request == 'post'
         response = HTTMultiParty.post(url, :query => params, :headers => headers)
+        Rails.logger.info "1"
+        Rails.logger.info response
         recording.update_attributes(:chrono_id => response["id"])
       else
         put_url = url + "/#{recording.chrono_id}"
         response = HTTMultiParty.put(put_url, :query => params, :headers => headers)
+        Rails.logger.info "1"
+        Rails.logger.info response
         recording.update_attributes(:chrono_id => response["id"])
       end
     end
