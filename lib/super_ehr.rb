@@ -21,6 +21,7 @@ module SuperEHR
 
     # initialize necessary components
     def initialize(default_params={})
+      Rails.logger.info "initialized"
       @default_params = default_params
     end
 
