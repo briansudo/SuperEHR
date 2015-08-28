@@ -3,7 +3,7 @@ require 'uri'
 require 'httparty'
 require 'httmultiparty'
 require 'builder'
-require 'time' 
+require 'time'
 require 'dotenv'
 
 Dotenv.load
@@ -308,7 +308,7 @@ module SuperEHR
       url = "#{@uri}/#{auth_paths[@version]}/token"
       params = {:grant_type => "client_credentials"}
       response = HTTParty.post(url, :body => params, :basic_auth => auth)
-      
+
       return response["access_token"]
     end
 
@@ -365,7 +365,7 @@ module SuperEHR
         response = make_request("GET", "ping", {})
         if response["pong"] == "true"
           return true
-        else 
+        else
           return false
         end
       rescue
@@ -411,7 +411,7 @@ module SuperEHR
         while endpoint
           data = make_request("GET", endpoint, params)
           if data["patients"]
-            data["patients"].each do |patient| 
+            data["patients"].each do |patient|
               result << patient
             end
           end
