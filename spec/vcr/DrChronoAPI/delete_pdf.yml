@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://drchrono.com/api/patients
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer 3ZOCPnwfoN7VfdGh7k4lrBuEYs4gN1
+  response:
+    status:
+      code: 401
+      message: UNAUTHORIZED
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Thu, 30 Jul 2015 17:11:14 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Xss-Protection:
+      - '1'
+      X-Content-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      Vary:
+      - User-Agent, Authorization, Cookie
+      X-Frame-Options:
+      - sameorigin
+    body:
+      encoding: UTF-8
+      string: '{"error": "Invalid OAuth token"}'
+    http_version: 
+  recorded_at: Fri, 31 Jul 2015 17:11:15 GMT
+recorded_with: VCR 2.9.3

@@ -5,14 +5,8 @@ http_interactions:
     uri: https://drchrono.com/o/token/
     body:
       encoding: UTF-8
-      string: refresh_token=lHiwUEoO2JnCfiCFbhAiSiOVPmUCU2&grant_type=refresh_token&redirect_uri=http%3A%2F%2Fdashboard.ekodevices.com%2Fsync_chrono&client_id=ayIg8rp7JcN9MeD8X1TYvx5xMH50nL1NNHONhXiWm8eXW6ntIpp6WYdehVA5tBDF&client_secret=XW64OeenH5usIdDMt57vu09mPdtLdHRoJPxAWWjBd0HAikUJsMIFeqrDtPmPfhNq
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
+      string: refresh_token=Z9S1k0cz1P30wqblavw1Gg3yjiZbuS&grant_type=refresh_token&redirect_uri=http%3A%2F%2Fdashboard.ekodevices.com%2Fsync_chrono&client_id=ayIg8rp7JcN9MeD8X1TYvx5xMH50nL1NNHONhXiWm8eXW6ntIpp6WYdehVA5tBDF&client_secret=XW64OeenH5usIdDMt57vu09mPdtLdHRoJPxAWWjBd0HAikUJsMIFeqrDtPmPfhNq
+    headers: {}
   response:
     status:
       code: 200
@@ -21,7 +15,7 @@ http_interactions:
       Server:
       - nginx/1.4.6 (Ubuntu)
       Date:
-      - Tue, 04 Aug 2015 17:55:26 GMT
+      - Tue, 28 Jul 2015 17:14:45 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -43,13 +37,13 @@ http_interactions:
       X-Frame-Options:
       - sameorigin
       Set-Cookie:
-      - csrftoken=Crp9IiYUXMhCBcf0tXyf43TFZ34AR7P7; expires=Tue, 02-Aug-2016 17:55:26
+      - csrftoken=pvvBoiEeSfSWDaaI1knb9bGVdYXnUyqz; expires=Tue, 26-Jul-2016 17:14:45
         GMT; Max-Age=31449600; Path=/
     body:
       encoding: UTF-8
-      string: '{"access_token": "q7JU3WNa6rvo8A8PeBfUKm52tpUXd5", "token_type": "Bearer",
-        "expires_in": 36000, "refresh_token": "JgWKU4WEmBOQnLUHfM7a3UG0jx0GZb", "scope":
+      string: '{"access_token": "Lb7CGck0eaEwVL3Vvmmo1atSucsNnm", "token_type": "Bearer",
+        "expires_in": 36000, "refresh_token": "wd0ZJIP3grbMaBx1XGtUkqwM8i6h0C", "scope":
         "patients labs calendar patients:summary user"}'
     http_version: 
-  recorded_at: Tue, 04 Aug 2015 17:55:26 GMT
+  recorded_at: Tue, 28 Jul 2015 17:14:45 GMT
 recorded_with: VCR 2.9.3

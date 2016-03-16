@@ -1,0 +1,82 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://asdxn7ey53utvrnn792qcaqx:yGjmwscpnjQDjCQ@api.athenahealth.com/oauthpreview/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 18 Aug 2015 22:50:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Mashery Proxy
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1e-73.mashery.com
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"hedpxbypm6mp3te76j84rvw4","token_type":"bearer","expires_in":3600,"refresh_token":"6zsyfbge9tkxtu63a86kcjcz"}'
+    http_version: 
+  recorded_at: Tue, 18 Aug 2015 22:50:35 GMT
+- request:
+    method: get
+    uri: https://api.athenahealth.com/preview1/1234543213/ping
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer hedpxbypm6mp3te76j84rvw4
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 18 Aug 2015 22:50:35 GMT
+      Nncoection:
+      - close
+      Pragma:
+      - No-cache
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Mashery-Message-Id:
+      - 06a007d0-9106-49b6-8ee1-7108c7f6c38d
+      X-Mashery-Responder:
+      - prod-j-worker-us-east-1b-76.mashery.com
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "\n\n{\n\t\"error\" : \"Invalid practice.\",\n\t\"detailedmessage\"
+        : \"The practice ID does not exist.\"\n}\n"
+    http_version: 
+  recorded_at: Tue, 18 Aug 2015 22:50:36 GMT
+recorded_with: VCR 2.9.3

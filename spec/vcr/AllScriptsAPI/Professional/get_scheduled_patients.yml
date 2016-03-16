@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://pro141ga.unitysandbox.com/Unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:10:00 GMT
+    body:
+      encoding: UTF-8
+      string: CCD04C2C-9B3C-4129-B6BA-898438D23A18
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:09:54 GMT
+- request:
+    method: post
+    uri: http://pro141ga.unitysandbox.com/Unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetSchedule","AppUserID":"terry","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"","Token":"CCD04C2C-9B3C-4129-B6BA-898438D23A18","Parameter1":"2015-08-07","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '24'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:10:00 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getscheduleinfo":[]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:09:54 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://pro141ga.unitysandbox.com/Unity/unityservice.svc/json/GetToken
+    body:
+      encoding: UTF-8
+      string: '{"Username":"EkoDe-EkoDevices-test","Password":"%k!D%v#c%S3%3f6"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:08:13 GMT
+    body:
+      encoding: UTF-8
+      string: 5947421B-8242-4D3E-B245-7C05939F9D29
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:08:07 GMT
+- request:
+    method: post
+    uri: http://pro141ga.unitysandbox.com/Unity/unityservice.svc/json/MagicJson
+    body:
+      encoding: UTF-8
+      string: '{"Action":"GetChangedPatients","AppUserID":"terry","Appname":"EkoDevices.EkoDevicesAllscriptsAPI.TestApp","PatientID":"","Token":"5947421B-8242-4D3E-B245-7C05939F9D29","Parameter1":"01/01/2013","Parameter2":"","Parameter3":"","Parameter4":"","Parameter5":"","Parameter6":"","Data":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '7387'
+      Content-Type:
+      - application/json
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Fri, 07 Aug 2015 17:08:13 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"getchangedpatientsinfo":[{"patientid":"2"},{"patientid":"3"},{"patientid":"4"},{"patientid":"5"},{"patientid":"6"},{"patientid":"7"},{"patientid":"8"},{"patientid":"9"},{"patientid":"10"},{"patientid":"11"},{"patientid":"15"},{"patientid":"16"},{"patientid":"17"},{"patientid":"18"},{"patientid":"19"},{"patientid":"20"},{"patientid":"21"},{"patientid":"22"},{"patientid":"33"},{"patientid":"51"},{"patientid":"163"},{"patientid":"309"},{"patientid":"682"},{"patientid":"764"},{"patientid":"1036"},{"patientid":"1418"},{"patientid":"1519"},{"patientid":"1556"},{"patientid":"1915"},{"patientid":"2680"},{"patientid":"2839"},{"patientid":"3481"},{"patientid":"4412"},{"patientid":"4803"},{"patientid":"5049"},{"patientid":"5212"},{"patientid":"5521"},{"patientid":"5689"},{"patientid":"6056"},{"patientid":"6208"},{"patientid":"6549"},{"patientid":"6693"},{"patientid":"7079"},{"patientid":"7585"},{"patientid":"8252"},{"patientid":"8372"},{"patientid":"9017"},{"patientid":"9092"},{"patientid":"9736"},{"patientid":"10059"},{"patientid":"10248"},{"patientid":"10421"},{"patientid":"10842"},{"patientid":"10979"},{"patientid":"11470"},{"patientid":"12302"},{"patientid":"13022"},{"patientid":"13253"},{"patientid":"13549"},{"patientid":"13593"},{"patientid":"15555"},{"patientid":"16458"},{"patientid":"17997"},{"patientid":"18337"},{"patientid":"18913"},{"patientid":"18941"},{"patientid":"19155"},{"patientid":"19369"},{"patientid":"19401"},{"patientid":"19418"},{"patientid":"19680"},{"patientid":"19763"},{"patientid":"20936"},{"patientid":"21518"},{"patientid":"21684"},{"patientid":"21890"},{"patientid":"22546"},{"patientid":"24737"},{"patientid":"25179"},{"patientid":"25360"},{"patientid":"26108"},{"patientid":"26186"},{"patientid":"26558"},{"patientid":"26787"},{"patientid":"27016"},{"patientid":"27154"},{"patientid":"27190"},{"patientid":"27334"},{"patientid":"27406"},{"patientid":"27551"},{"patientid":"27667"},{"patientid":"27727"},{"patientid":"28181"},{"patientid":"28651"},{"patientid":"28745"},{"patientid":"31136"},{"patientid":"31349"},{"patientid":"32096"},{"patientid":"32200"},{"patientid":"32528"},{"patientid":"33290"},{"patientid":"33294"},{"patientid":"33468"},{"patientid":"33754"},{"patientid":"33759"},{"patientid":"34107"},{"patientid":"34551"},{"patientid":"34575"},{"patientid":"34961"},{"patientid":"35259"},{"patientid":"35500"},{"patientid":"35533"},{"patientid":"35553"},{"patientid":"35741"},{"patientid":"35984"},{"patientid":"35985"},{"patientid":"36031"},{"patientid":"36411"},{"patientid":"36530"},{"patientid":"37225"},{"patientid":"37996"},{"patientid":"37999"},{"patientid":"38092"},{"patientid":"38298"},{"patientid":"38381"},{"patientid":"38655"},{"patientid":"38775"},{"patientid":"38778"},{"patientid":"38950"},{"patientid":"39327"},{"patientid":"39578"},{"patientid":"40227"},{"patientid":"40797"},{"patientid":"41109"},{"patientid":"41207"},{"patientid":"41265"},{"patientid":"41301"},{"patientid":"41336"},{"patientid":"41542"},{"patientid":"41588"},{"patientid":"41793"},{"patientid":"41834"},{"patientid":"41909"},{"patientid":"42118"},{"patientid":"42163"},{"patientid":"42231"},{"patientid":"42359"},{"patientid":"42905"},{"patientid":"43043"},{"patientid":"43068"},{"patientid":"43198"},{"patientid":"43332"},{"patientid":"43706"},{"patientid":"43773"},{"patientid":"43928"},{"patientid":"44449"},{"patientid":"44462"},{"patientid":"44729"},{"patientid":"44733"},{"patientid":"44735"},{"patientid":"44745"},{"patientid":"45269"},{"patientid":"45583"},{"patientid":"45631"},{"patientid":"45780"},{"patientid":"45900"},{"patientid":"45997"},{"patientid":"46026"},{"patientid":"46076"},{"patientid":"46093"},{"patientid":"46122"},{"patientid":"46345"},{"patientid":"46516"},{"patientid":"46563"},{"patientid":"47100"},{"patientid":"47675"},{"patientid":"47749"},{"patientid":"48021"},{"patientid":"48198"},{"patientid":"49259"},{"patientid":"49286"},{"patientid":"49485"},{"patientid":"49970"},{"patientid":"50281"},{"patientid":"50335"},{"patientid":"50383"},{"patientid":"50387"},{"patientid":"50443"},{"patientid":"50667"},{"patientid":"50772"},{"patientid":"50938"},{"patientid":"50977"},{"patientid":"51009"},{"patientid":"51640"},{"patientid":"51893"},{"patientid":"52297"},{"patientid":"52317"},{"patientid":"52353"},{"patientid":"52512"},{"patientid":"52866"},{"patientid":"53151"},{"patientid":"53181"},{"patientid":"53219"},{"patientid":"53323"},{"patientid":"54160"},{"patientid":"54243"},{"patientid":"54401"},{"patientid":"54520"},{"patientid":"54627"},{"patientid":"55859"},{"patientid":"55955"},{"patientid":"55979"},{"patientid":"56089"},{"patientid":"56316"},{"patientid":"56377"},{"patientid":"56574"},{"patientid":"56926"},{"patientid":"57172"},{"patientid":"57632"},{"patientid":"57720"},{"patientid":"58396"},{"patientid":"58580"},{"patientid":"58979"},{"patientid":"59073"},{"patientid":"59079"},{"patientid":"59195"},{"patientid":"59219"},{"patientid":"59271"},{"patientid":"59329"},{"patientid":"59555"},{"patientid":"59567"},{"patientid":"59612"},{"patientid":"59887"},{"patientid":"60093"},{"patientid":"60188"},{"patientid":"60279"},{"patientid":"60768"},{"patientid":"61434"},{"patientid":"61588"},{"patientid":"61681"},{"patientid":"61744"},{"patientid":"62482"},{"patientid":"62641"},{"patientid":"62741"},{"patientid":"62851"},{"patientid":"63151"},{"patientid":"63164"},{"patientid":"63920"},{"patientid":"63923"},{"patientid":"63975"},{"patientid":"64021"},{"patientid":"64025"},{"patientid":"64514"},{"patientid":"65122"},{"patientid":"65226"},{"patientid":"65580"},{"patientid":"65585"},{"patientid":"65656"},{"patientid":"66070"},{"patientid":"66156"},{"patientid":"66222"},{"patientid":"66280"},{"patientid":"66325"},{"patientid":"66419"},{"patientid":"66444"},{"patientid":"66456"},{"patientid":"66457"},{"patientid":"66458"},{"patientid":"66459"},{"patientid":"66460"},{"patientid":"66461"},{"patientid":"66462"},{"patientid":"66463"},{"patientid":"66464"},{"patientid":"66465"},{"patientid":"66466"},{"patientid":"66467"},{"patientid":"66470"},{"patientid":"66473"},{"patientid":"66474"},{"patientid":"66475"},{"patientid":"66477"},{"patientid":"66478"},{"patientid":"66486"},{"patientid":"66504"},{"patientid":"66505"},{"patientid":"66509"},{"patientid":"66515"},{"patientid":"66516"},{"patientid":"66517"},{"patientid":"66518"},{"patientid":"66519"},{"patientid":"66520"},{"patientid":"66526"},{"patientid":"66528"},{"patientid":"66530"},{"patientid":"66532"},{"patientid":"66533"},{"patientid":"66534"},{"patientid":"66535"},{"patientid":"66539"},{"patientid":"66541"},{"patientid":"66544"},{"patientid":"66548"},{"patientid":"66549"},{"patientid":"66551"},{"patientid":"66552"},{"patientid":"66553"},{"patientid":"66554"},{"patientid":"66556"},{"patientid":"66557"},{"patientid":"66558"},{"patientid":"66559"},{"patientid":"66560"},{"patientid":"66561"},{"patientid":"66567"},{"patientid":"66568"},{"patientid":"66569"},{"patientid":"66570"},{"patientid":"66578"},{"patientid":"66579"},{"patientid":"66580"},{"patientid":"66581"},{"patientid":"66582"},{"patientid":"66584"},{"patientid":"66588"},{"patientid":"66589"},{"patientid":"66594"},{"patientid":"66595"},{"patientid":"66596"},{"patientid":"66597"},{"patientid":"66598"},{"patientid":"66599"},{"patientid":"66622"},{"patientid":"66626"},{"patientid":"66627"},{"patientid":"66628"},{"patientid":"66629"},{"patientid":"66630"}]}]'
+    http_version: 
+  recorded_at: Fri, 07 Aug 2015 17:08:08 GMT
+recorded_with: VCR 2.9.3
